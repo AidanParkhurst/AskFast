@@ -11,35 +11,49 @@
         name.length > 0 && objective.length > 0
         && (questions.length > 0 ? questions.every(q => q.length > 0) : true)
 
-    let createSurvey = () => {
-        console.log("Creating survey...")
-    }
-
     let addQuestion = () => {
-        console.log("Adding question...")
         questionIndex += 1;
         questions = [...questions, ""]
+    }
+
+    let deleteQuestion = (e, i) => {
+        if ((e.key === "Backspace" || e.key === "Delete") && questions[i].length === 0) {
+            questions = questions.filter((_, index) => index !== i);
+            questionIndex -= 1;
+
+            /* Previously, holding down the backspace key would delete all questions */
+            /* So this solution just moves the focus to the create button */
+            /* Then removes the focus entirely */
+            let button = document.getElementsByClassName('create')[0];
+            button.focus();
+            button.blur();
+        }
     }
 </script>
 
 <div class="container">
-    <div class="form">
+    <form method="POST" enctype="multipart/form-data">
         <h2>Title</h2>
         <input type="text" class="entry" name="title" placeholder="Survey on..." bind:value={name}/>
         <h2>Objective(s)</h2>
         <textarea class="entry" name="objective" cols="80" rows="3" placeholder="Find out how people feel about..." bind:value={objective}/>
         {#if questionIndex >= 0}
-            <h2>Questions</h2>
             <div style="width: 100%;" transition:fade>
-            {#each questions as question, i}
-                <textarea class="entry question" name="question" cols=30 rows="2" bind:value={questions[i]} placeholder="What do you think about..." />
+            <h2>Questions</h2>
+            {#each questions as _, i}
+                <textarea 
+                    class="entry question"
+                    name="q{i}"
+                    cols=30 rows="2"
+                    bind:value={questions[i]}
+                    on:keydown={(e) => {deleteQuestion(e, i)}}
+                    placeholder="What do you think about..." />
             {/each}
-            <button class="create" on:click={addQuestion}>
+            <button type="button" class="create" on:click={addQuestion}>
                 <h2>+ Add A Question</h2>
             </button>
             </div>
             <Button
-                on:click={createSurvey}
                 style= "text-align: left; font-weight: bold; margin-top: 2em;"
                 disabled="{questionIndex < 1 || !valid}"
                 class="large green">
@@ -48,13 +62,14 @@
         {:else}
         <Button
             on:click={() => {questionIndex += 1}}
+            type="button"
             style= "text-align: left; font-weight: bold; margin-top: 2em;"
             disabled="{!valid}"
             class="large blue">
                Continue 
         </Button>
         {/if}
-    </div>
+    </form>
 </div>
 
 <style>
@@ -71,7 +86,7 @@
         color: var(--color-dark);
     }
     
-    .form {
+    form {
         display: flex;
         flex-direction: column;
 
@@ -134,7 +149,7 @@
     }
 
     textarea {
-        resize: vertical;
+        resize: none;
     }
 
     .create {

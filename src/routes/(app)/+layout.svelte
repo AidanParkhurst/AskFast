@@ -15,14 +15,6 @@
 </script>
 
 <div class="toolbar">
-    <Button class="icon" on:click={() => {goto('/dashboard')}}>
-        <!--svg of a dashboard icon-->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-            stroke="currentColor" fill="currentColor">
-            <path d="M3 13h-3v-10h3v10zm0 8h-3v-6h3v6zm5-8h-3v-14h3v14zm0 8h-3v-6h3v6zm5-8h-3v-10h3v10zm0 8h-3v-6h3v6zm5-8h-3v-14h3v14zm0 8h-3v-6h3v6zm5-8h-3v-10h3v10zm0 8h-3v-6h3v6z"/>
-        </svg>
-        Dashboard
-    </Button>
     <Button class="icon" on:click={() => {goto('/create')}}>
         <!--svg of a create icon-->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -30,6 +22,14 @@
             <path d="M12 2v20m-10-10h20"/>
         </svg> <br>
         Create
+    </Button>
+    <Button class="icon" on:click={() => {goto('/dashboard')}}>
+        <!--svg of a dashboard icon-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            stroke="currentColor" fill="currentColor">
+            <path d="M3 13h-3v-10h3v10zm0 8h-3v-6h3v6zm5-8h-3v-14h3v14zm0 8h-3v-6h3v6zm5-8h-3v-10h3v10zm0 8h-3v-6h3v6zm5-8h-3v-14h3v14zm0 8h-3v-6h3v6zm5-8h-3v-10h3v10zm0 8h-3v-6h3v6z"/>
+        </svg>
+        Dashboard
     </Button>
     <Button class="icon" on:click={() => {signOut()}}>
         <!--svg of a sign out icon-->

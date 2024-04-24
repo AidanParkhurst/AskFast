@@ -42,7 +42,7 @@
 
     .icon {
         background-color: transparent;
-        color: var(--color-dark);
+        color: var(--color-mid);
     }
     .icon:hover {
         background-color: var(--color-border);
