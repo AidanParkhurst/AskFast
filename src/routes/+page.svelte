@@ -7,6 +7,7 @@
 
     onMount(() => {
         if ($page.data.session) {
+            console.log($page.data.session)
             goto("/dashboard")
         }
     })

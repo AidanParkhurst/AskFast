@@ -43,6 +43,8 @@
     .icon {
         background-color: transparent;
         color: var(--color-mid);
+        width: 75%;
+        height: 25%;
     }
     .icon:hover {
         background-color: var(--color-border);
