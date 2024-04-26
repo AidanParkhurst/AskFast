@@ -1,5 +1,5 @@
 <script>
-    let title = 'Survey Tool';
+    let title = 'Ask Fast';
 </script>
 
 <title>{title}</title>

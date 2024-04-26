@@ -1,4 +1,4 @@
-# Survey Tool
+# Ask Fast 
 Create surveys and analyze responses fast with this **AI powered** webapp!👋 <br>
 Built using **SvelteKit**, and tested using **Vite**. 🏎️
 
