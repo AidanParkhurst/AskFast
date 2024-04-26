@@ -29,6 +29,10 @@
             button.blur();
         }
     }
+
+    /* Gets the response from the form submission */
+    /* If form exists, form.success and form.error will be set */
+    export let form;
 </script>
 
 <div class="container">
@@ -70,6 +74,15 @@
         </Button>
         {/if}
     </form>
+    {#if form?.success}
+    <div class="notif success">
+        <h3>Survey Created!</h3>
+    </div>
+    {:else if form?.error}
+    <div class="notif error">
+        <h3>Error Creating Survey</h3>
+    </div>
+    {/if}
 </div>
 
 <style>
@@ -178,8 +191,46 @@
     .create:hover h2 {
         color: var(--color-light);
     }
-
     .create:active {
         scale: 0.95;
+    }
+
+    .notif {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        color: var(--color-light);
+
+        border-radius: 10px;
+        box-shadow: 5px 5px 20px var(--color-border); 
+
+        transition: 0.3s all;
+        animation: fade 1s 3s forwards;
+    }
+    .notif h3 {
+        font-size: 1em;
+        margin: 0;
+        padding: 0.5em 1em;
+    }
+    .notif.success {
+        background-color: var(--color-success);
+    }
+    .notif.error {
+        background-color: var(--color-danger);
+    }
+
+    @keyframes fade {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
     }
 </style>

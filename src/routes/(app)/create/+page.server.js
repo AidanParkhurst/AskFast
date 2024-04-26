@@ -5,25 +5,32 @@ export const actions = {
         /* Get the form data from our frontend */
         const survey = await request.formData();
         const jsurvey = Object.fromEntries(survey);
-       
+
         /* Get the user ID from our session database */
         let sessionToken = cookies.get('authjs.session-token');
         let userSession = await db.collection('sessions').findOne({sessionToken: sessionToken});
-        let userId = userSession.userId
+        let userId = userSession.userId;
 
         try {
             /* Insert the survey into the database */
-            await db.collection('surveys').insertOne({
+            let result = await db.collection('surveys').insertOne({
                 userId: userId,
                 survey: jsurvey,
+                responses: [],
                 published: false,
             });
-
+            
+            if(result?.insertedId) {
+                let surveyId = result.insertedId;
+                await db.collection('users').updateOne(
+                    { _id: userId },
+                    { $push: { surveys: surveyId }}
+                );
+            }
+            
             return {
-                status: 200,
-                body: {
-                    message: 'Survey published successfully',
-                },
+                success: true,
+                error: false,
             };
 
         } catch(err) {
@@ -31,10 +38,8 @@ export const actions = {
         }
 
         return {
-            status: 500,
-            body: {
-                message: 'Survey publish failed',
-            },
+            success: false,
+            error: true,
         };
     }
 }

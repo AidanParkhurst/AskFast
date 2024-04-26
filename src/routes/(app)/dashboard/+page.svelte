@@ -2,21 +2,13 @@
     import { page } from "$app/stores"
     import { goto } from "$app/navigation"
 
-    /* TODO: Fetch this, possibly in +page.server.js */
-    let surveys = [
-        {
-            title: "Opinions on Surveys",
-            objective: "Find out how people feel about being surveyed.",
-            responses: 103
-        }
-    ]
-
+    export let data;
+    $: surveys = data.surveys ?? []
+    
     let handleKey = (e) => {
-    /* TODO: Some kind of key handling
         if (e.key === "Enter") {
             createSurvey()
         }
-    */
     }
     
     let createSurvey = () => {
@@ -42,17 +34,21 @@
             <div class="survey" role="button" tabindex="0"
                 on:click={() => {inspect(survey.title)}}
                 on:keydown={handleKey}>
-                <div class="stat">
-                    <h3>Title</h3>
+                <div class="stat header">
                     <h2>{survey.title}</h2>
-                </div>
-                <div class="stat">
-                    <h3>Objective</h3>
                     <p>{survey.objective}</p>
                 </div>
                 <div class="stat">
+                    <h3>Questions</h3>
+                    <p>{survey.questions.length}</p>
+                </div>
+                <div class="stat">
                     <h3>Responses</h3>
-                    <p>{survey.responses}</p>
+                    <p>{survey.responses.length}</p>
+                </div>
+                <div class="stat">
+                    <h3>Published</h3>
+                    <p>{survey.published ? "Yes" : "No"}</p>
                 </div>
             </div>
         {/each}
@@ -94,6 +90,9 @@
         flex-direction: column;
         align-items: center;
 
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+
         background-color: var(--color-light);
         color: var(--color-dark);
 
@@ -104,6 +103,7 @@
     }
     .survey {
         width: 90%;
+        min-height: 20%;
         height: 20%;
 
         display: flex;
@@ -138,24 +138,36 @@
         background-color: var(--color-success);
         color: var(--color-light);
     }
+    .survey:nth-last-child(1) {
+        margin-bottom: 1rem;
+    }
 
     .stat {
         height: 100%;
-        max-width: 30%;
+        max-width: 25%;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0 1rem;
+    }
+    .stat.header {
+        max-width: 40%;
+        width: 40%;
+        align-items: start;
     }
     .stat h2 {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: var(--color-dark);
-        margin: 0;
+        margin: 0 0 0.5rem 0;
     }
     .stat h3 {
         font-size: 1rem;
         font-weight: 500;
         color: var(--color-mid);
-        margin: 1rem 0 0.5rem 0;
+        margin: -1rem 0 0.5rem 0;
     }
     .stat p {
         font-size: 1rem;
