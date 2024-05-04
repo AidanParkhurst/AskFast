@@ -15,7 +15,7 @@
 </script>
 
 <div class="toolbar">
-    <Button class="icon" on:click={() => {goto('/create')}}>
+    <Button class="icon green" on:click={() => {goto('/create')}}>
         <!--svg of a create icon-->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
             stroke="currentColor" stroke-width="2" fill="currentColor">
@@ -23,7 +23,7 @@
         </svg> <br>
         Create
     </Button>
-    <Button class="icon" on:click={() => {goto('/dashboard')}}>
+    <Button class="icon blue" on:click={() => {goto('/dashboard')}}>
         <!--svg of a dashboard icon-->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
             stroke="currentColor" fill="currentColor">

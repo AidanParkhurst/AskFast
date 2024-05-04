@@ -40,19 +40,6 @@
         cursor: not-allowed;
     }
 
-    .icon {
-        background-color: transparent;
-        color: var(--color-mid);
-        width: 75%;
-        height: 25%;
-    }
-    .icon:hover {
-        background-color: var(--color-border);
-    }
-    .icon:active {
-        background-color: var(--color-dark);
-        color: var(--color-light);
-    }
     .green {
         background-color: var(--color-success);
         color: var(--color-light);
@@ -72,5 +59,46 @@
     .large {
         font-size: 1.5rem;
         padding: 1rem 2rem;
+    }
+    .bold {
+        font-weight: bold;
+    }
+
+    .icon {
+        background-color: transparent;
+        color: var(--color-mid);
+        width: 75%;
+        height: 25%;
+    }
+    .icon:hover {
+        background-color: var(--color-border);
+    }
+    .icon:active {
+        background-color: var(--color-dark);
+        color: var(--color-light);
+    }
+    .icon.green {
+        background-color: var(--color-light);
+        color: var(--color-mid);
+    }
+    .icon.green:hover {
+        background-color: var(--color-border);
+        color: var(--color-success);
+    }
+    .icon.green:active {
+        background-color: var(--color-success);
+        color: var(--color-light);
+    }
+    .icon.blue {
+        background-color: var(--color-light);
+        color: var(--color-mid);
+    }
+    .icon.blue:hover {
+        background-color: var(--color-border);
+        color: var(--color-info);
+    }
+    .icon.blue:active {
+        background-color: var(--color-info);
+        color: var(--color-light);
     }
 </style>

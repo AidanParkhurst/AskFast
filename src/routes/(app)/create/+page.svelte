@@ -76,11 +76,11 @@
     </form>
     {#if form?.success}
     <div class="notif success">
-        <h3>Survey Created!</h3>
+        <h3>+ Survey Created!</h3>
     </div>
     {:else if form?.error}
     <div class="notif error">
-        <h3>Error Creating Survey</h3>
+        <h3>- Error Creating Survey</h3>
     </div>
     {/if}
 </div>

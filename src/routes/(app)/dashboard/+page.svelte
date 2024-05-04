@@ -15,8 +15,8 @@
         goto("/create");
     }
 
-    let inspect = (title) => {
-        console.log(`Inspecting survey: ${title}`)
+    let inspect = (id) => {
+        goto(`/dashboard/${id}`)
     }
 </script>
 
@@ -32,7 +32,7 @@
         </div>
         {#each surveys as survey}
             <div class="survey" role="button" tabindex="0"
-                on:click={() => {inspect(survey.title)}}
+                on:click={() => {inspect(survey.id)}}
                 on:keydown={handleKey}>
                 <div class="stat header">
                     <h2>{survey.title}</h2>
@@ -131,8 +131,8 @@
     }
     .survey.create {
         justify-content: center;
-        background-color: var(--color-border);
-        color: var(--color-mid);
+        background-color: var(--color-dark);
+        color: var(--color-light);
     }
     .survey.create:hover {
         background-color: var(--color-success);
