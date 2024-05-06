@@ -3,7 +3,6 @@
     import { goto } from "$app/navigation"
 
     export let data;
-    $: surveys = data.surveys ?? []
     
     let handleKey = (e) => {
         if (e.key === "Enter") {
@@ -30,6 +29,7 @@
             on:keydown={handleKey}>
             <h2>+ Create a New Survey</h2>
         </div>
+        {#await data.streamed.surveys then surveys}
         {#each surveys as survey}
             <div class="survey" role="button" tabindex="0"
                 on:click={() => {inspect(survey.id)}}
@@ -52,6 +52,9 @@
                 </div>
             </div>
         {/each}
+        {:catch error}
+        <p>{error.message}</p>
+        {/await}
     </div>
 </div>
 

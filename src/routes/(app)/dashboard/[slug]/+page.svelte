@@ -18,10 +18,6 @@
     $: questions = data.questions ?? [];
     $: responses = data.responses ?? [];
     $: published = data.published ?? false;
-    let aiSummary;
-    $: if(data.aiSummary) {
-        aiSummary = data.aiSummary.split("\n");
-    }
     let copyLink = () => {
         navigator.clipboard.writeText(`http://localhost:5173/s/${id}`);
     }
@@ -52,9 +48,15 @@
     </div>
     <div class="card">
         <h3>Analyze with AI <b>Pro</b></h3>
-        {#each aiSummary as newline}
+        {#await data.streamed.aiSummary}
+            <p>Processing...</p>
+        {:then aiSummary}
+        {#each aiSummary.split("\n") as newline}
             <p>{newline}</p>
         {/each}
+        {:catch error}
+            <p>Error: {error.message}</p>
+        {/await}
     </div>
     <div class="card">
         <h3>Responses ({responses.length})</h3>
@@ -81,6 +83,8 @@
     .container {
         margin: 0;
         padding-top: 10vh;
+
+        min-height: 100vh;
         height: fit-content;
         width: 100%;
 
@@ -153,10 +157,6 @@
         font-size: 1.2rem;
         color: var(--color-info);
         text-decoration: none;
-    }
-    .stat p {
-        margin: 0;
-        font-size: 1.2rem;
     }
 
     .switch input {

@@ -27,30 +27,31 @@ export async function load({ params, cookies }) {
             }
         }
 
-        let aiSummary = "";
-        try {
-            /* Todo, figure out how to chunk response data if it gets too large*/
-            const completion = await openai.chat.completions.create({
-                messages: [
-                    { role: "system",
-                        content: "You will analyze a survey titled \"" + survey.title + "\", with the objective: \"" + survey.objective + "\"."
+        let getSummary = async () => {
+            try {
+                /* Todo, figure out how to chunk response data if it gets too large*/
+                return openai.chat.completions.create({
+                    messages: [
+                        { role: "system",
+                            content: "You will analyze a survey titled \"" + survey.title + "\", with the objective: \"" + survey.objective + "\"."
+                            },
+                        { role: "system",
+                            content: "The questions were: [" + questions.join("\", \"") + "]."
                         },
-                    { role: "system",
-                        content: "The questions were: [" + questions.join("\", \"") + "]."
-                    },
-                    { role: "system",
-                        content: "The responses were: [" + surveyEntry.responses.join("\", \"") + "]."
-                    },
-                    { role: "user",
-                        content: "What are the results of the survey? Keeping in mind the objective?"
+                        { role: "system",
+                            content: "The responses were: [" + surveyEntry.responses.join("\", \"") + "]."
                         },
-                    ],
-                model: "gpt-3.5-turbo",
-            });
-            console.log(completion.choices[0]);
-            aiSummary= completion.choices[0].message.content;
-        } catch(err) {
-            console.log(err);
+                        { role: "user",
+                            content: "What are the results of the survey? Keeping in mind the objective?"
+                            },
+                        ],
+                    model: "gpt-3.5-turbo",
+                }).then((completion) => {
+                    return completion.choices[0].message.content;
+                });
+            } catch(err) {
+                console.log(err);
+            }
         }
 
         /* Then return all the data */
@@ -61,7 +62,9 @@ export async function load({ params, cookies }) {
             questions: questions,
             responses: surveyEntry.responses,
             published: surveyEntry.published,
-            aiSummary: aiSummary,
+            streamed: {
+                aiSummary: getSummary(),
+            }
         };
     } 
 }
