@@ -3,26 +3,35 @@ import { ObjectId } from "mongodb";
 
 export async function load({ params, cookies }) {
     let surveyId = params.slug;
-    let surveyIdObj = ObjectId.createFromHexString(surveyId);
-    let surveyEntry = await db.collection('surveys').findOne({_id: surveyIdObj});
-    if (surveyEntry === null /*|| surveyEntry.published === false*/) {
-        return {
-            status: 404,
-            error: "Survey not found",
+    try {
+        let surveyIdObj = ObjectId.createFromHexString(surveyId);
+        let surveyEntry = await db.collection('surveys').findOne({_id: surveyIdObj});
+        if (surveyEntry === null || surveyEntry.published === false) {
+            return {
+                status: 404,
+                error: "Survey not found",
+            }
         }
+
+        let survey = surveyEntry.survey;
+        let questions = [];
+        for(let question in survey) {
+            if(question.at(0) === 'q') {
+                questions.push(survey[question]);
+            }
+        }
+        return {
+            id: surveyEntry._id.toString(),
+            title: survey.title,
+            questions: questions,
+        }
+    } catch(err) {
+        console.log(err);
     }
 
-    let survey = surveyEntry.survey;
-    let questions = [];
-    for(let question in survey) {
-        if(question.at(0) === 'q') {
-            questions.push(survey[question]);
-        }
-    }
     return {
-        id: surveyEntry._id.toString(),
-        title: survey.title,
-        questions: questions,
+        status: 404,
+        error: "Survey not found",
     }
 }
 

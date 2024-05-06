@@ -14,7 +14,7 @@
         --color-border: #ddd;
         --color-success: #28a745;
         --color-danger: #dc3545;
-        --color-warning: #ffc107;
+        --color-highlight: #ffc107;
         --color-info: #17a2b8;
     }
 </style>

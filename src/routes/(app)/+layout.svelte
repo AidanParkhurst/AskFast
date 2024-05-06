@@ -3,7 +3,6 @@
     import { page } from "$app/stores"
     import { goto } from "$app/navigation"
     import { onMount } from "svelte"
-    import { fade } from "svelte/transition"; 
 
     import Button from "$lib/components/Button.svelte";
 
@@ -31,19 +30,25 @@
         </svg>
         Dashboard
     </Button>
-    <Button class="icon" on:click={() => {signOut()}}>
-        <!--svg of a sign out icon-->
+    <Button class="icon" on:click={() => {goto('/account')}}>
+        <!--svg of a profile icon-->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
             stroke="currentColor" fill="currentColor">
-            <path d="M17 16l4-4-4-4m-6 8h-14v-16h14m-7-12v6m0 0v6m0-6h6"/>
+            <path d="M12 14c-3.313 0-6-2.687-6-6s2.687-6 6-6 6 2.687 6 6-2.687 6-6 6zm0 2c4.687 0 8 2.687 8 4v2h-16v-2c0-1.313 3.313-4 8-4z"/>
         </svg> <br>
-        Sign Out
+        Account 
     </Button>
 </div>
 <div class="contents">
     <slot></slot>
 </div>
 
+<!-- Sign out icon
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+    stroke="currentColor" fill="currentColor">
+    <path d="M17 16l4-4-4-4m-6 8h-14v-16h14m-7-12v6m0 0v6m0-6h6"/>
+</svg> <br>
+-->
 <style>
     :root {
         --toolwidth: 10vw;

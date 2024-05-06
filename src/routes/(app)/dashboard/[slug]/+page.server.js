@@ -1,4 +1,6 @@
 import db from "$lib/db/mongo";
+import { ObjectId } from "mongodb";
+import { openai } from "$lib/ai/openai";
 
 export async function load({ params, cookies }) {
     /* Fetch the user from the session*/
@@ -25,7 +27,31 @@ export async function load({ params, cookies }) {
             }
         }
 
-        /* Todo, run analytics on the survey */
+        let aiSummary = "";
+        try {
+            /* Todo, figure out how to chunk response data if it gets too large*/
+            const completion = await openai.chat.completions.create({
+                messages: [
+                    { role: "system",
+                        content: "You will analyze a survey titled \"" + survey.title + "\", with the objective: \"" + survey.objective + "\"."
+                        },
+                    { role: "system",
+                        content: "The questions were: [" + questions.join("\", \"") + "]."
+                    },
+                    { role: "system",
+                        content: "The responses were: [" + surveyEntry.responses.join("\", \"") + "]."
+                    },
+                    { role: "user",
+                        content: "What are the results of the survey? Keeping in mind the objective?"
+                        },
+                    ],
+                model: "gpt-3.5-turbo",
+            });
+            console.log(completion.choices[0]);
+            aiSummary= completion.choices[0].message.content;
+        } catch(err) {
+            console.log(err);
+        }
 
         /* Then return all the data */
         return {
@@ -35,6 +61,40 @@ export async function load({ params, cookies }) {
             questions: questions,
             responses: surveyEntry.responses,
             published: surveyEntry.published,
+            aiSummary: aiSummary,
         };
     } 
+}
+
+export const actions = {
+    default: async ({ request, cookies }) => {
+        /* Get the form data from our frontend */
+        const responses = await request.formData();
+        const jresponses = Object.fromEntries(responses);
+
+        try { 
+            let publishStatus = jresponses.publish === 'on';
+            let surveyId = jresponses.surveyId;
+           
+            /* Update the survey's published status in our database */
+            let surveyIdObj = ObjectId.createFromHexString(surveyId);
+            await db.collection('surveys').updateOne(
+                { _id: surveyIdObj },
+                { $set: { published: publishStatus }}
+            ); 
+
+            return {
+                success: true,
+                result: publishStatus,
+            };
+
+        } catch(err) {
+            console.log(err);
+        }
+
+        return {
+            success: false,
+            result: false,
+        };
+    }
 }

@@ -20,15 +20,20 @@
     {#if form?.success}
         <p>Answers submitted.</p>
         <h1>Thank you for your time!</h1>
-        <Button 
-        class="large green" 
-        style="margin-top: 2em;"
+        <Button class="green" 
         on:click={() => {goto('/')}}>
             Return to Home 
         </Button>
     {:else if form?.error}
         <p>Try again later.</p>
-        <h1>Woops! Error Submitting your answers</h1>
+        <h1>Woops! There was an error submitting your answers</h1>
+        <Button class="red"
+        on:click={() => {goto('/')}}>
+            Return to Home 
+        </Button>
+    {:else if data?.error}
+        <p>Survey unavailable.</p>
+        <h1>This survey is currently closed, or the URL is incorrect.</h1>
         <Button on:click={() => {goto('/')}}>
             Return to Home 
         </Button>
@@ -63,6 +68,9 @@
         {/if}
     </form>
     {/if}
+    <div class="watermark">
+        <p>Powered by <a href="/">Ask Fast</a></p>
+    </div>
 </div>
 
 <style>
@@ -88,8 +96,9 @@
     form {
         display: flex;
         flex-direction: column;
-        
+
         padding: 10px 20px;
+
         background-color: var(--color-light);
         color: var(--color-dark);
         
@@ -135,5 +144,18 @@
         font-weight: bold;
         color: var(--color-mid);
         margin: 0 0 0.5em 0;
+    }
+
+    .watermark {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        padding: 1em;
+        color: var(--color-mid);
+    }
+    .watermark a {
+        color: var(--color-info);
+        text-decoration: none;
     }
 </style>

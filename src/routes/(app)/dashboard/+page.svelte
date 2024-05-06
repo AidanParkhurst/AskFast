@@ -47,7 +47,7 @@
                     <p>{survey.responses.length}</p>
                 </div>
                 <div class="stat">
-                    <h3>Published</h3>
+                    <h3>Open</h3>
                     <p>{survey.published ? "Yes" : "No"}</p>
                 </div>
             </div>
