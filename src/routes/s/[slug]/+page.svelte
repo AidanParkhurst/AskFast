@@ -52,17 +52,15 @@
         <Button
             on:click={() => {questionIndex += 1}}
             type="button"
-            style= "text-align: left; font-weight: bold;"
             disabled="{!valid}"
-            class="large blue">
+            class="large blue form">
                Continue 
         </Button>
         {:else}
         <Button
             type="submit"
-            style= "text-align: left; font-weight: bold;"
             disabled="{!valid}"
-            class="large green">
+            class="large green form">
                 Submit Survey
         </Button>
         {/if}

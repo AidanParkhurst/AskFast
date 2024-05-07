@@ -58,18 +58,16 @@
             </button>
             </div>
             <Button
-                style= "text-align: left; font-weight: bold; margin-top: 2em;"
                 disabled="{questionIndex < 1 || !valid}"
-                class="large green">
+                class="large green form">
                     Create Survey 
             </Button>
         {:else}
         <Button
             on:click={() => {questionIndex += 1}}
             type="button"
-            style= "text-align: left; font-weight: bold; margin-top: 2em;"
             disabled="{!valid}"
-            class="large blue">
+            class="large blue form">
                Continue 
         </Button>
         {/if}

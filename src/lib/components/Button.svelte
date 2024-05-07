@@ -40,6 +40,17 @@
         cursor: not-allowed;
     }
 
+    button.signin {
+        margin-bottom: 11rem;
+    }
+
+    button.form {
+        text-align: left;
+        font-weight: bold;
+        margin: 0;
+        margin-top: 1.5rem;
+        width: 100%;
+    }
     .green {
         background-color: var(--color-success);
         color: var(--color-light);
@@ -62,6 +73,11 @@
     }
     .bold {
         font-weight: bold;
+    }
+
+    .small {
+        font-size: .8rem;
+        padding: 0.25rem 0.5rem;
     }
 
     .icon {

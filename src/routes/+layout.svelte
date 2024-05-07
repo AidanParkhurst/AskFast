@@ -16,5 +16,7 @@
         --color-danger: #dc3545;
         --color-highlight: #ffc107;
         --color-info: #17a2b8;
+
+        --reasonable-width: 70%;
     }
 </style>

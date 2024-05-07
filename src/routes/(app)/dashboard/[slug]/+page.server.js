@@ -47,6 +47,7 @@ export async function load({ params, cookies }) {
                         ],
                     model: "gpt-3.5-turbo",
                 }).then((completion) => {
+                    console.log(completion);
                     return completion.choices[0].message.content;
                 });
             } catch(err) {

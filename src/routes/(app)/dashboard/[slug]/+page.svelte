@@ -28,15 +28,17 @@
 <div class="container">
     <h1 class="title">{title}</h1>
     <h2 class="objective">{objective}</h2>
-    <div class="card">
-        <h3>Publicity</h3>
+    <div class="stats card">
         <div class="stat">
-            <h2>Shareable Link:</h2>
-            <a href="/s/{id}">http://localhost:5173/s/{id}</a>
-            <Button style="margin: 0;" class="blue" on:click={copyLink}>Copy Link</Button>
+            <h3>Responses</h3>
+            <h2>{responses.length}</h2>
         </div>
         <div class="stat">
-            <h2>Accept Responses:</h2> 
+            <h3>Questions</h3>
+            <h2>{questions.length}</h2>
+        </div>
+        <div class="stat">
+            <h3>Public</h3>
             <form bind:this={publishForm} method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="surveyId" value={id}>
                 <label class="switch">
@@ -45,6 +47,15 @@
                 </label>
             </form>
         </div>
+        <Button style="margin: 0;" class="blue" on:click={copyLink}>Copy Link</Button>
+    </div>
+    <div class="card">
+        <h3>Responses By Question</h3>
+        {#each questions as question, i}
+            <div class="question">
+                <h2>{question}</h2>
+            </div>
+        {/each}
     </div>
     <div class="card">
         <h3>Analyze with AI <b>Pro</b></h3>
@@ -57,11 +68,6 @@
         {:catch error}
             <p>Error: {error.message}</p>
         {/await}
-    </div>
-    <div class="card">
-        <h3>Responses ({responses.length})</h3>
-        <div class="stat">
-        </div>
     </div>
 
     {#if form?.success && form?.result}
@@ -113,7 +119,7 @@
     }
 
     .card {
-        width: 70%;
+        width: var(--reasonable-width);
 
         margin: 2em 0;
         padding: 1rem;
@@ -139,24 +145,28 @@
         border-radius: 5px;
     }
 
-    .stat {
+    .card.stats {
         display: flex;
         flex-direction: row;
-        align-items: center;
-        gap: 1em;
+        justify-content: space-between;
 
-        margin: 0 0 1rem 0;
-        color: var(--color-dark);
+        background-color: var(--color-dark);
+        color: var(--color-light);
+    }
+    .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
     .stat h2 {
         margin: 0;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        color: var(--color-light);
+        text-align: center;
     }
-    .stat a {
+    .stat h3 {
+        color: var(--color-border);
         margin: 0;
-        font-size: 1.2rem;
-        color: var(--color-info);
-        text-decoration: none;
     }
 
     .switch input {
@@ -203,6 +213,23 @@
         border: 2px solid var(--color-info); 
     }
 
+    .question {
+        margin: 0.5rem 0;
+        padding: 0.5rem 1rem;
+
+        cursor: pointer;
+
+        border-radius: 10px;
+        border: 1px solid var(--color-border);
+        background-color: var(--color-light);
+        color: var(--color-dark);
+
+        transition: 0.3s all;
+
+    }
+    .question:hover {
+        background-color: var(--color-border);
+    }
     .notif {
         position: fixed;
         right: 1rem;
