@@ -1,5 +1,6 @@
 <script>
     import Button from "$lib/components/Button.svelte";
+    import { fade } from "svelte/transition";
 
     let publishForm;
     /*
@@ -22,40 +23,68 @@
         navigator.clipboard.writeText(`http://localhost:5173/s/${id}`);
     }
 
+    let selected = -1;
+    $: shownResponses = [];
+    let select = (i) => {
+        shownResponses = responses.map(r => r[i]);
+        selected = i;
+    }
+    let deselect = () => {
+        shownResponses = [];
+        selected = -1;
+    }
+
     export let form;
 </script>
 
 <div class="container">
-    <h1 class="title">{title}</h1>
-    <h2 class="objective">{objective}</h2>
-    <div class="stats card">
-        <div class="stat">
-            <h3>Responses</h3>
-            <h2>{responses.length}</h2>
+    <div class="details card">
+        <h1 class="title">{title}</h1>
+        <h2 class="objective">{objective}</h2>
+        <div class="stats">
+            <div class="stat">
+                <h3>Responses</h3>
+                <h2>{responses.length}</h2>
+            </div>
+            <div class="stat">
+                <h3>Questions</h3>
+                <h2>{questions.length}</h2>
+            </div>
+            <div class="stat">
+                <h3>Public</h3>
+                <form bind:this={publishForm} method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="surveyId" value={id}>
+                    <label class="switch">
+                        <input type="checkbox" name="publish" checked={published} on:change={publishForm.submit()}>
+                        <span class="slider"></span>
+                    </label>
+                </form>
+            </div>
+            <Button style="margin: 0;" class="blue" on:click={copyLink}>Copy Link</Button>
         </div>
-        <div class="stat">
-            <h3>Questions</h3>
-            <h2>{questions.length}</h2>
-        </div>
-        <div class="stat">
-            <h3>Public</h3>
-            <form bind:this={publishForm} method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="surveyId" value={id}>
-                <label class="switch">
-                    <input type="checkbox" name="publish" checked={published} on:change={publishForm.submit()}>
-                    <span class="slider"></span>
-                </label>
-            </form>
-        </div>
-        <Button style="margin: 0;" class="blue" on:click={copyLink}>Copy Link</Button>
     </div>
     <div class="card">
         <h3>Responses By Question</h3>
+        {#if shownResponses.length > 0}
+            <div role="button" tabindex="0" class="question label"
+                on:click={deselect}
+                on:keydown={deselect}>
+                <h2>{questions[selected]}</h2>
+            </div>
+            {#each shownResponses as response}
+                <div class="response">
+                    <p>{response}</p>
+                </div>
+            {/each}
+        {:else}
         {#each questions as question, i}
-            <div class="question">
+            <div role="button" tabindex="0" class="question"
+                on:click={()=>{select(i)}}
+                on:keydown={()=>{select(i)}}>
                 <h2>{question}</h2>
             </div>
         {/each}
+        {/if}
     </div>
     <div class="card">
         <h3>Analyze with AI <b>Pro</b></h3>
@@ -88,7 +117,7 @@
 <style>
     .container {
         margin: 0;
-        padding-top: 10vh;
+        padding-top: 2vh;
 
         min-height: 100vh;
         height: fit-content;
@@ -109,13 +138,13 @@
         font-size: 2rem;
         font-weight: bold;
         margin: 0 0 0.5rem 0;
-        color: var(--color-dark);
+        color: var(--color-light);
     }
     h2.objective {
         font-size: 1.5rem;
         font-weight: bold;
-        margin: 0;
-        color: var(--color-mid);
+        margin: 0 0 2rem 0;
+        color: var(--color-border);
     }
 
     .card {
@@ -145,13 +174,19 @@
         border-radius: 5px;
     }
 
-    .card.stats {
+    .card.details {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        border: 2px solid var(--color-dark);
+        background-color: var(--color-dark);
+        color: var(--color-light);
+    }
+    .stats {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
-        background-color: var(--color-dark);
-        color: var(--color-light);
     }
     .stat {
         display: flex;
@@ -229,6 +264,36 @@
     }
     .question:hover {
         background-color: var(--color-border);
+    }
+    .question:active {
+        transform: scale(0.95);
+        background-color: var(--color-dark);
+        color: var(--color-light);
+    }
+    .question.label {
+        border: 1px solid var(--color-dark);
+        background-color: var(--color-dark);
+        color: var(--color-light);
+    }
+    .question.label:hover {
+        border: 1px solid var(--color-danger);
+        background-color: var(--color-danger);
+        color: var(--color-light);
+    }
+    .question h2 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .response {
+        margin: 0.5rem 0;
+        padding: 0.5rem 1rem;
+
+        border-radius: 10px;
+        border: 1px solid var(--color-border);
+        background-color: var(--color-light);
+        color: var(--color-dark);
     }
     .notif {
         position: fixed;

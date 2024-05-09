@@ -1,9 +1,12 @@
 <script>
-    import { page } from "$app/stores"
     import { goto } from "$app/navigation"
 
     export let data;
     
+    let formattedBalance = "$0.00";
+    $: if(data.streamed.user.balance !== undefined) {
+        formattedBalance = "$" + data.streamed.user.balance.toFixed(2);
+    }
     let handleKey = (e) => {
         if (e.key === "Enter") {
             createSurvey()
@@ -21,7 +24,18 @@
 
 <div class="container">
     <div class="toprow">
+        {#await data.streamed.user}
+        <h1>Loading...</h1>
+        {:then user}
         <h1>Your Surveys</h1>
+        <span>
+            <h3>Balance</h3>
+            <!-- balance formatted as USD -->
+            <h2>{formattedBalance}</h2>
+        </span>
+        {:catch error}
+        <h1>{error.message}</h1>
+        {/await}
     </div>
     <div class="surveys">
         <div class="survey create" role="button" tabindex="0" 
@@ -83,6 +97,20 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+    }
+    .toprow h3 {
+        font-size: 1rem;
+        color: var(--color-mid);
+        margin: 0;
+    }
+    .toprow h2 {
+        font-size: 1.5rem;
+        text-align: center;
+        color: var(--color-dark);
+        margin: 0;
+    }
+    .toprow h1 {
+        font-size: 2rem;
     }
 
     .surveys {

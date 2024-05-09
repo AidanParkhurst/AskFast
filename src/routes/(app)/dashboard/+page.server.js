@@ -39,6 +39,7 @@ export async function load({ cookies }) {
 
 	return {
         streamed: {
+            user: { name: user.name, surveys: user.surveys.length, balance: user.balance},
             surveys: getSurveyData(), 
         }
 	};

@@ -44,22 +44,31 @@
         </div>
     </div>
 
-    <div class="banner blue">
+    <div class="banner green">
         <div class="fakeForm">
-            <h4 class="title">Objective</h4>
-            <h4 class="input">Find out how people survey</h4>
-            <h4 class="title">Questions</h4>
-            <h4 class="input">Got something to ask people?</h4>
-            <h4 class="input">What questions will you use?</h4>
-            <h4 class="input">Would AI be helpful?</h4>
-            <Button style="margin: 0; width: 100%; text-align: left; margin-top: 1rem;"
-                    class="small green">
-                Start Surveying
-            </Button>
+            <h4 class="title">How would you rate this app?</h4>
+            <h4 class="input">9.5/10, needs more cowbell</h4>
+            <h4 class="input">It's the best ever!</h4>
+            <h4 class="input">Hmm... I'm thinking a strong ten.</h4>
+            <h4 class="input">⭐⭐⭐⭐⭐</h4>
         </div>
         <div class="info">
-            <h2>Curious what people think?</h2>
-            <p>Set an objective, write some questions, and find out!</p>
+            <h2>Get Real Answers</h2>
+            <p>Participants express their voice with open ended responses</p>
+        </div>
+    </div>
+    
+    <div class="banner blue">
+        <div class="info">
+            <h2>See The Big Picture</h2>
+            <p>Quickly analyze responses for actionable takeaways.</p>
+        </div>
+        <div class="fakeForm">
+            <h4 class="title">How would you rate this app?</h4>
+            <h4 class="input">9.5/10, needs more cowbell</h4>
+            <h4 class="input">It's the best ever! 1000</h4>
+            <h4 class="input">Hmm... I'm thinking a strong ten.</h4>
+            <h4 class="input">⭐⭐⭐⭐⭐</h4>
         </div>
     </div>
 </div>
@@ -140,6 +149,7 @@
         flex-direction: column;
         justify-content: center;
         gap: 0;
+        margin: 0;
     }
     .fakeForm {
         padding: 1rem;
