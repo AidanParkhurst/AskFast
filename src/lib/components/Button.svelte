@@ -43,6 +43,23 @@
     button.signin {
         margin-bottom: 11rem;
     }
+    button.ai {
+        width: 10%;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 1rem;
+        border-radius: 1rem;
+        color: var(--color-mid);
+        background-color: var(--color-border);
+    }
+    button.ai:hover {
+        background-color: var(--color-dark);
+        color: var(--color-highlight);
+    }
+    button.ai:active {
+        background-color: var(--color-highlight);
+        color: var(--color-light);
+    }
 
     button.form {
         text-align: left;

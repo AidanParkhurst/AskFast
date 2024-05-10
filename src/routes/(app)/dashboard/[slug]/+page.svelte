@@ -86,17 +86,20 @@
         {/each}
         {/if}
     </div>
-    <div class="card">
-        <h3>Analyze with AI <b>Pro</b></h3>
-        {#await data.streamed.aiSummary}
-            <p>Processing...</p>
-        {:then aiSummary}
-        {#each aiSummary.split("\n") as newline}
-            <p>{newline}</p>
-        {/each}
-        {:catch error}
-            <p>Error: {error.message}</p>
-        {/await}
+    <div class="card ai">
+        <h3>Ask about your data</h3>
+        <div class="chat">
+            <div class="message">
+                <input class="entry" placeholder="Ask a question...">
+                <Button class="ai">
+                    <!--Up Arrow-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        stroke="currentColor" fill="currentColor">
+                        <path d="M12 2l10 10h-7v10h-6v-10h-7z" />
+                </Button>
+            </div>
+        </div>
+
     </div>
 
     {#if form?.success && form?.result}
@@ -166,6 +169,12 @@
         font-size: 1rem;
         margin: 0 0 0.5rem 0;
     }
+    .message {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
     .card h3 b {
         background-color: var(--color-highlight);
         color: var(--color-light);
@@ -174,6 +183,31 @@
         border-radius: 5px;
     }
 
+    .message {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .entry {
+        font-family: 'Inter', sans-serif;
+        font-size: 2em;
+        
+        padding: 0.2em .5em;
+        width: 100%;
+        background-color: var(--color-border);
+        color: var(--color-dark);
+
+        border-radius: 15px;
+        border: 2px solid var(--color-border);
+    }
+    .entry::placeholder {
+        color: var(--color-mid);
+        opacity: 1;
+    }
+    .entry::ms-input-placeholder {
+        color: var(--color-mid);
+    }
     .card.details {
         display: flex;
         flex-direction: column;
@@ -276,9 +310,14 @@
         color: var(--color-light);
     }
     .question.label:hover {
-        border: 1px solid var(--color-danger);
-        background-color: var(--color-danger);
-        color: var(--color-light);
+        border: 1px solid var(--color-border);
+        background-color: var(--color-border);
+        color: var(--color-dark);
+    }
+    .question.label:active {
+        transform: scale(0.95);
+        background-color: var(--color-light);
+        color: var(--color-dark);
     }
     .question h2 {
         margin: 0;

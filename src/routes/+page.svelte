@@ -61,14 +61,12 @@
     <div class="banner blue">
         <div class="info">
             <h2>See The Big Picture</h2>
-            <p>Quickly analyze responses for actionable takeaways.</p>
+            <p>Use AI, and discover actionable takeaways.</p>
         </div>
         <div class="fakeForm">
-            <h4 class="title">How would you rate this app?</h4>
-            <h4 class="input">9.5/10, needs more cowbell</h4>
-            <h4 class="input">It's the best ever! 1000</h4>
-            <h4 class="input">Hmm... I'm thinking a strong ten.</h4>
-            <h4 class="input">⭐⭐⭐⭐⭐</h4>
+            <h4 class="input">
+                <span>How likely are users to </span>
+            </h4>
         </div>
     </div>
 </div>
