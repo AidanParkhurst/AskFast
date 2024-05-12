@@ -97,7 +97,7 @@
                 {#if response}
                     <p>{response}</p>
                 {:else}
-                    <p style="color: var(--color-mid);">Analyzing...</p>
+                    <p style="color: var(--color-mid);">Analyzing {responses.length * questions.length} responses...</p>
                 {/if}
                 </div>
             {/if}

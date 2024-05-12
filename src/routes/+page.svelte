@@ -32,14 +32,14 @@
         </div>
         <div class="fakeForm">
             <h4 class="title">Objective</h4>
-            <h4 class="input">Find out how people survey</h4>
+            <h4 class="input">Learn how people make surveys</h4>
             <h4 class="title">Questions</h4>
             <h4 class="input">Got something to ask people?</h4>
             <h4 class="input">What questions will you use?</h4>
             <h4 class="input">Would AI be helpful?</h4>
             <Button style="margin: 0; width: 100%; text-align: left; margin-top: 1rem;"
                     class="small green">
-                Start Surveying
+                Create Survey 
             </Button>
         </div>
     </div>
@@ -53,7 +53,7 @@
             <h4 class="input">⭐⭐⭐⭐⭐</h4>
         </div>
         <div class="info">
-            <h2>Get Real Answers</h2>
+            <h2>Get Authentic Answers</h2>
             <p>Participants express their voice with open ended responses</p>
         </div>
     </div>
@@ -64,10 +64,41 @@
             <p>Use AI to discover actionable takeaways.</p>
         </div>
         <div class="fakeForm">
-            <h4 class="input">
-                <span>How likely are users to </span>
-            </h4>
+            <div class="chat">
+                <div class="prompt">
+                    <h4>How do people make surveys?</h4>
+                </div>
+                <div class="response">
+                    <h4>Based on the responses, users tend to make surveys using slow, old tools, that lack AI assistance.</h4>
+                </div>
+            </div>
+            <div class="message">
+                <h4 class="input">
+                    <span>What will you ask?</span>
+                </h4>
+                <Button 
+                style="margin: 0.2rem; padding: 0.4rem 0.5rem; width: 20%; border-radius: 10px;"
+                class="ai">
+                ↑
+                </Button>
+            </div>
         </div>
+    </div>
+
+    <div class="pay">
+        <h3>Access Everything</h3>
+        <span class="pricing">
+            <h4>$10</h4><h2>$5</h2><h3>USD</h3>
+        </span>
+        <ul class="perks">
+            <li>Unlimited surveys</li>
+            <li>Uncapped survey length</li>
+            <li>Share, open and close surveys on demand</li>
+            <li>View responses immediately</li>
+            <li>Powerful AI analysis</li>
+            <li>Responsive support</li>
+        </ul>
+        <Button class="large green">Get Started Surveying</Button>
     </div>
 </div>
 
@@ -106,7 +137,7 @@
         margin: 1rem 0;
     }
     h4.bottom {
-        margin: 0 0 20rem 0;
+        margin: 0 0 15rem 0;
         font-size: 1rem;
         text-align: center;
         color: var(--color-info);
@@ -133,14 +164,14 @@
         color: var(--color-light);
         margin: 0;
     }
-    .banner.red {
-        background-color: var(--color-danger);
-    }
     .banner.green {
+        padding-left: 2rem;
+        padding-right: 0;
         background-color: var(--color-success);
     }
     .banner.blue {
         background-color: var(--color-info);
+        margin-bottom: 15rem;
     }
     .info {
         display: flex;
@@ -182,4 +213,120 @@
         transform: scale(1.1);
     }
 
+    .prompt {
+        width: fit-content;
+
+        margin: 0 0 0.5rem auto;
+
+        border-radius: 10px 10px 0 10px;
+        background-color: var(--color-info);
+        color: var(--color-light);
+
+        transition: 0.3s all;
+    }
+    .prompt h4 {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+        margin: 0;
+        font-weight: normal;
+    }
+    .prompt:hover {
+        transform: scale(1.1);
+    }
+    .response {
+        width: 80%;
+
+        margin: 0 0 0.5rem 0;
+
+        border-radius: 10px 10px 10px 0;
+        background-color: var(--color-border);
+        color: var(--color-dark);
+        
+        transition: 0.3s all;
+    }
+    .response h4 {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+        margin: 0;
+        font-weight: normal;
+    }
+    .response:hover {
+        transform: scale(1.1);
+    }
+    .message {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .message .input {
+        width: 100%;
+        margin: 0;
+        color: var(--color-mid);
+    }
+    .message .input:hover {
+        transform: none;
+    }
+
+    .pay {
+        display: flex;
+        flex-direction: column;
+
+        width: calc(var(--reasonable-width) / 2);
+
+        margin-bottom: 10rem;
+        padding: 2rem;
+
+        border-radius: 15px;
+        border: 2px solid var(--color-border);
+        box-shadow: 5px 5px 20px var(--color-border);
+
+        background-color: var(--color-light);
+
+        transition: 0.3s all;
+    }
+    .pay:hover {
+        transform: scale(1.1);
+        border: 2px solid var(--color-success);
+    }
+    .pay h3 {
+        margin: 0 0 1rem 0;
+    }
+    .pricing h4 {
+        display: inline;
+
+        color: var(--color-mid);
+        text-decoration: line-through;
+        font-size: 1.5rem;
+
+        margin: 0 0.5rem 0 0;
+    }
+    .pricing h2 {
+        display: inline;
+
+        color: var(--color-dark);
+        font-size: 2.5rem;
+
+        margin: 0 0.5rem 0 0;
+    }
+    .pricing h3 {
+        display: inline;
+
+        color: var(--color-mid);
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    .perks {
+        list-style: none;
+        padding: 0;
+        font-size: 1.5rem;
+        color: var(--color-mid);
+    }
+    .perks li {
+        margin-bottom: 1rem;
+    }
+    .perks li:before {
+        content: "✓ ";
+    }
 </style>

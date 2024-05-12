@@ -83,17 +83,6 @@
         align-items: center;
         justify-content: space-between;
     }
-    .toprow h3 {
-        font-size: 1rem;
-        color: var(--color-mid);
-        margin: 0;
-    }
-    .toprow h2 {
-        font-size: 1.5rem;
-        text-align: center;
-        color: var(--color-dark);
-        margin: 0;
-    }
     .toprow h1 {
         font-size: 2rem;
     }
