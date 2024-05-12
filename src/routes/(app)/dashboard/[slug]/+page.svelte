@@ -34,13 +34,36 @@
         selected = -1;
     }
 
+    let prompt = "";
+    let sent = undefined;
+    let response = undefined;
+
+    let sendPrompt = () => {
+        if (prompt.length <= 0) return;
+
+        sent = prompt;
+        prompt = "";
+
+        fetch("/api/analyze", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                survey: id,
+                prompt: sent 
+            })
+        }).then(res => res.json())
+        .then(res => response = res.data);
+    }
+
     export let form;
 </script>
 
 <div class="container">
+    <h1 class="title">{title}</h1>
+    <h2 class="objective">{objective}</h2>
     <div class="details card">
-        <h1 class="title">{title}</h1>
-        <h2 class="objective">{objective}</h2>
         <div class="stats">
             <div class="stat">
                 <h3>Responses</h3>
@@ -61,6 +84,33 @@
                 </form>
             </div>
             <Button style="margin: 0;" class="blue" on:click={copyLink}>Copy Link</Button>
+        </div>
+    </div>
+    <div class="card ai">
+        <h3>Ask about your data</h3>
+        <div class="chat">
+            {#if sent}
+                <div class="sent">
+                    <p>{sent}</p>
+                </div>
+                <div class="inference">
+                {#if response}
+                    <p>{response}</p>
+                {:else}
+                    <p style="color: var(--color-mid);">Analyzing...</p>
+                {/if}
+                </div>
+            {/if}
+        </div>
+        <div class="message">
+            <input bind:value={prompt} class="entry" placeholder="What would you like to know?">
+            <Button class="ai"
+                on:click={sendPrompt}>
+                <!--Up Arrow-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    stroke="currentColor" fill="currentColor">
+                    <path d="M12 2l10 10h-7v10h-6v-10h-7z" />
+            </Button>
         </div>
     </div>
     <div class="card">
@@ -86,21 +136,6 @@
         {/each}
         {/if}
     </div>
-    <div class="card ai">
-        <h3>Ask about your data</h3>
-        <div class="chat">
-            <div class="message">
-                <input class="entry" placeholder="Ask a question...">
-                <Button class="ai">
-                    <!--Up Arrow-->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        stroke="currentColor" fill="currentColor">
-                        <path d="M12 2l10 10h-7v10h-6v-10h-7z" />
-                </Button>
-            </div>
-        </div>
-
-    </div>
 
     {#if form?.success && form?.result}
     <div class="notif success">
@@ -120,7 +155,7 @@
 <style>
     .container {
         margin: 0;
-        padding-top: 2vh;
+        padding-top: 5vh;
 
         min-height: 100vh;
         height: fit-content;
@@ -141,13 +176,13 @@
         font-size: 2rem;
         font-weight: bold;
         margin: 0 0 0.5rem 0;
-        color: var(--color-light);
+        color: var(--color-dark);
     }
     h2.objective {
         font-size: 1.5rem;
         font-weight: bold;
-        margin: 0 0 2rem 0;
-        color: var(--color-border);
+        margin: 0 0 1rem 0;
+        color: var(--color-mid);
     }
 
     .card {
@@ -169,53 +204,15 @@
         font-size: 1rem;
         margin: 0 0 0.5rem 0;
     }
-    .message {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .card h3 b {
-        background-color: var(--color-highlight);
-        color: var(--color-light);
-        padding: 0.2rem 0.4rem;
-        margin-left: 0.5rem;
-        border-radius: 5px;
-    }
 
-    .message {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .entry {
-        font-family: 'Inter', sans-serif;
-        font-size: 2em;
-        
-        padding: 0.2em .5em;
-        width: 100%;
-        background-color: var(--color-border);
-        color: var(--color-dark);
-
-        border-radius: 15px;
-        border: 2px solid var(--color-border);
-    }
-    .entry::placeholder {
-        color: var(--color-mid);
-        opacity: 1;
-    }
-    .entry::ms-input-placeholder {
-        color: var(--color-mid);
-    }
     .card.details {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
 
-        border: 2px solid var(--color-dark);
-        background-color: var(--color-dark);
-        color: var(--color-light);
+        border: 2px solid var(--color-border);
+        background-color: var(--color-light);
+        color: var(--color-dark);
     }
     .stats {
         display: flex;
@@ -230,11 +227,11 @@
     .stat h2 {
         margin: 0;
         font-size: 1.5rem;
-        color: var(--color-light);
+        color: var(--color-dark);
         text-align: center;
     }
     .stat h3 {
-        color: var(--color-border);
+        color: var(--color-mid);
         margin: 0;
     }
 
@@ -324,7 +321,6 @@
         font-size: 1.2rem;
         font-weight: 500;
     }
-
     .response {
         margin: 0.5rem 0;
         padding: 0.5rem 1rem;
@@ -334,6 +330,60 @@
         background-color: var(--color-light);
         color: var(--color-dark);
     }
+
+    .chat {
+        padding: 0 0.5rem 0 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .message {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .sent {
+        padding: 0.5rem 1rem;
+        margin: 0 0 0.5rem auto;
+        width: fit-content;
+
+        border-radius: 15px 15px 0px 15px;
+
+        background-color: var(--color-info);
+        color: var(--color-light);
+    }
+    .inference {
+        padding: 0.5rem 1rem;
+        margin: 0;
+        width: 80%;
+       
+        border-radius: 15px 15px 15px 0;
+        
+        background-color: var(--color-border);
+        color: var(--color-dark);
+    }
+    p {
+        font-size: 1.2rem;
+    }
+    .entry {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.5em;
+        
+        padding: 0.2em .5em;
+        width: 100%;
+        background-color: var(--color-border);
+        color: var(--color-dark);
+
+        border-radius: 15px;
+        border: 2px solid var(--color-border);
+    }
+    .entry::placeholder {
+        color: var(--color-mid);
+        opacity: 1;
+    }
+    .entry::ms-input-placeholder {
+        color: var(--color-mid);
+    }
+   
     .notif {
         position: fixed;
         right: 1rem;

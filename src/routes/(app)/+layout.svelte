@@ -30,13 +30,13 @@
         </svg>
         Dashboard
     </Button>
-    <Button class="icon" on:click={() => {signOut()}}>
-        <!-- Sign out icon -->
+    <Button class="icon" on:click={() => {goto('/account')}}>
+        <!-- Profile Icon -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
             stroke="currentColor" fill="currentColor">
-            <path d="M17 16l4-4-4-4m-6 8h-14v-16h14m-7-12v6m0 0v6m0-6h6"/>
+            <path d="M12 2c-3.866 0-7 3.134-7 7s3.134 7 7 7 7-3.134 7-7-3.134-7-7-7zm0 2c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
         </svg> <br>
-        Sign out 
+        Profile 
     </Button>
 </div>
 <div class="contents">

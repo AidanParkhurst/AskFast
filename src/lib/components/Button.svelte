@@ -47,18 +47,17 @@
         width: 10%;
         margin-top: 0;
         margin-bottom: 0;
-        padding: 1rem;
-        border-radius: 1rem;
+        border-radius: 15px;
         color: var(--color-mid);
         background-color: var(--color-border);
     }
     button.ai:hover {
-        background-color: var(--color-dark);
-        color: var(--color-highlight);
+        color: var(--color-light);
+        background-color: var(--color-info);
     }
     button.ai:active {
-        background-color: var(--color-highlight);
-        color: var(--color-light);
+        background-color: var(--color-info);
+        color: var(--color-highlight);
     }
 
     button.form {
@@ -132,6 +131,18 @@
     }
     .icon.blue:active {
         background-color: var(--color-info);
+        color: var(--color-light);
+    }
+    .icon.red {
+        background-color: var(--color-light);
+        color: var(--color-mid);
+    }
+    .icon.red:hover {
+        background-color: var(--color-border);
+        color: var(--color-danger);
+    }
+    .icon.red:active {
+        background-color: var(--color-danger);
         color: var(--color-light);
     }
 </style>

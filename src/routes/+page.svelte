@@ -61,7 +61,7 @@
     <div class="banner blue">
         <div class="info">
             <h2>See The Big Picture</h2>
-            <p>Use AI, and discover actionable takeaways.</p>
+            <p>Use AI to discover actionable takeaways.</p>
         </div>
         <div class="fakeForm">
             <h4 class="input">
