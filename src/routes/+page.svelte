@@ -98,7 +98,7 @@
             <li>Powerful AI analysis</li>
             <li>Responsive support</li>
         </ul>
-        <Button class="large green">Get Started Surveying</Button>
+        <a href="https://buy.stripe.com/test_fZe28v2Axcle6vSeUU?prefilled_promo_code=ASK5" class="buy">Buy Ask Fast</a>
     </div>
 </div>
 
@@ -285,10 +285,6 @@
 
         transition: 0.3s all;
     }
-    .pay:hover {
-        transform: scale(1.1);
-        border: 2px solid var(--color-success);
-    }
     .pay h3 {
         margin: 0 0 1rem 0;
     }
@@ -328,5 +324,28 @@
     }
     .perks li:before {
         content: "✓ ";
+    }
+    
+    a.buy {
+        margin: 1rem 0 0 0;
+        padding: 0.5rem 1rem;
+
+        font-size: 1.5rem;
+        font-weight: 600;
+
+        border-radius: 10px;
+        background-color: var(--color-dark);
+        
+        color: var(--color-light);
+        text-decoration: none;
+        text-align: center;
+
+        transition: 0.3s all;
+    }
+    a.buy:hover {
+        background-color: var(--color-success);
+    }
+    a.buy:active {
+        transform: scale(0.95);
     }
 </style>

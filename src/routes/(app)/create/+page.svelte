@@ -64,7 +64,7 @@
             </Button>
         {:else}
         <Button
-            on:click={() => {questionIndex += 1}}
+            on:click={() => {questionIndex = 0; addQuestion()}}
             type="button"
             disabled="{!valid}"
             class="large blue form">
