@@ -2,6 +2,12 @@ import db from "$lib/db/mongo";
 import { openai } from "$lib/ai/openai";
 import { json } from "@sveltejs/kit";
 
+// Rough, slightly overestimated cost of using OpenAI's GPT-3.5 model
+const OPENAI_TOKEN_RATE = 0.0005 / 1000;
+const OPENAI_TOKENS_PER_WORD = 3 / 4;
+
+const UPSALE_RATE = 2;
+
 export async function POST({ request, cookies }) {
 
     /* Fetch the user from the session*/
@@ -35,8 +41,17 @@ export async function POST({ request, cookies }) {
 
     let prompt = body.prompt;
     try {
+        // Estimate the cost of the request
+        let wordCount = prompt.split(" ").length;
+        wordCount += questions.join("\", \"").split(" ").length;
+        wordCount += surveyEntry.responses.join("\", \"").split(" ").length;
+        let estimatedCost = wordCount * OPENAI_TOKENS_PER_WORD * OPENAI_TOKEN_RATE * UPSALE_RATE;
+        if (!user.balance || user.balance < estimatedCost) {
+            return json({ status: 402, message: "Insufficient funds to analyze the survey." });
+        }
+
         /* Todo, figure out how to chunk response data if it gets too large*/
-        return openai.chat.completions.create({
+        let completion = await openai.chat.completions.create({
             messages: [
                 { role: "system",
                     content: "You will analyze a survey titled \"" + survey.title + "\", with the objective: \"" + survey.objective + "\"."
@@ -52,10 +67,15 @@ export async function POST({ request, cookies }) {
                     },
                 ],
             model: "gpt-3.5-turbo",
-        }).then((completion) => {
-            console.log(completion);
-            return json({ status: 200, message: "Successfully analyzed the survey.", data: completion.choices[0].message.content});
         });
+        console.log(completion);
+        let data = completion.choices[0].message.content;
+        let tokensUsed = completion.usage.total_tokens;
+        let cost = tokensUsed * OPENAI_TOKEN_RATE * UPSALE_RATE;
+        user.balance -= cost;
+        await db.collection('users').updateOne({ _id: userId }, { $set: { balance: user.balance } });
+
+        return json({ status: 200, message: "Successfully analyzed the survey.", data: data, balance: user.balance});
     } catch(err) {
         console.log(err);
     }

@@ -19,6 +19,8 @@
     $: questions = data.questions ?? [];
     $: responses = data.responses ?? [];
     $: published = data.published ?? false;
+    $: balance = data.balance ?? 0;
+
     let copyLink = () => {
         navigator.clipboard.writeText(`http://localhost:5173/s/${id}`);
     }
@@ -54,7 +56,10 @@
                 prompt: sent 
             })
         }).then(res => res.json())
-        .then(res => response = res.data);
+        .then(res => {
+            response = res.data;
+            balance = res.balance;
+        });
     }
 
     export let form;

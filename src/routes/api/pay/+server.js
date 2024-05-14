@@ -19,8 +19,17 @@ export async function POST({ request }) {
         // Successful payment!
         console.log(event.data.object.amount_total / 100 + " received at " + event.data.object.created + "!")
         let customer = event.data.object.customer_details;
-        console.log(customer.email);
-        console.log(customer.name);
+        console.log("Email: " + customer.email + " Name: " + customer.name);
+
+        // Save the payment in our database
+        await db.collection('payments').insertOne({
+            amount: event.data.object.amount_total,
+            created: event.data.object.created,
+            email: customer.email,
+            name: customer.name,
+            balanceUpdated: false
+        });
+        console.log("Payment saved to database.");
     }
 
     return json({

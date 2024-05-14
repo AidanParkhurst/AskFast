@@ -12,6 +12,8 @@ export async function load({ params, cookies }) {
     let surveyId = params.slug;
     let surveys = user.surveys;
 
+    let balance = user.balance;
+
     /* find the survey in the user's surveys */
     let userCopy = surveys.find(survey => survey.valueOf() == surveyId);
 
@@ -34,6 +36,7 @@ export async function load({ params, cookies }) {
             questions: questions,
             responses: surveyEntry.responses,
             published: surveyEntry.published,
+            balance: balance,
         };
     } 
 }
