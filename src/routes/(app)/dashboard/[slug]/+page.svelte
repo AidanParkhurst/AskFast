@@ -45,6 +45,7 @@
 
         sent = prompt;
         prompt = "";
+        response = undefined;
 
         fetch("/api/analyze", {
             method: "POST",

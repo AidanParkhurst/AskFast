@@ -41,7 +41,12 @@
     }
 
     button.signin {
-        margin-bottom: 11rem;
+        background-color: var(--color-border);
+        color: var(--color-mid);
+    }
+    button.signin:hover {
+        background-color: var(--color-dark);
+        color: var(--color-light);
     }
     button.ai {
         width: 10%;
@@ -144,5 +149,13 @@
     .icon.red:active {
         background-color: var(--color-danger);
         color: var(--color-light);
+    }
+
+    @media (max-width: 700px) {
+        button.icon {
+            width: 100%;
+            height: 75%;
+            font-size: 0.8rem;
+        }
     }
 </style>

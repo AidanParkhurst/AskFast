@@ -19,4 +19,10 @@
 
         --reasonable-width: 70%;
     }
+
+    @media (max-width: 700px) {
+        :root {
+            --reasonable-width: 90%;
+        }
+    }
 </style>

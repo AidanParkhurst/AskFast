@@ -47,7 +47,10 @@ export async function POST({ request, cookies }) {
         wordCount += surveyEntry.responses.join("\", \"").split(" ").length;
         let estimatedCost = wordCount * OPENAI_TOKENS_PER_WORD * OPENAI_TOKEN_RATE * UPSALE_RATE;
         if (!user.balance || user.balance < estimatedCost) {
-            return json({ status: 402, message: "Insufficient funds to analyze the survey." });
+            return json({
+                status: 402, message: "Insufficient funds to analyze the survey.",
+                data: "You have insufficient balance to run this analysis, add more in the \"Account\" tab",
+                balance: user.balance});
         }
 
         /* Todo, figure out how to chunk response data if it gets too large*/

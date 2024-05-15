@@ -4,6 +4,7 @@
     import { goto } from "$app/navigation"
     import { onMount } from "svelte"
     import Button from "$lib/components/Button.svelte"
+    import Footer from "$lib/components/Footer.svelte"
 
     onMount(() => {
         if ($page.data.session) {
@@ -11,17 +12,22 @@
             goto("/dashboard")
         }
     })
+
+    let buyLink = "https://buy.stripe.com/test_fZe28v2Axcle6vSeUU?prefilled_promo_code=ASK5"
 </script>
 
 <div class="container">
+    <div class="nav">
+        <h4 class="name">Ask Fast</h4>
+        <Button class="signin"
+        on:click={signIn}>
+            Sign in with <b>Google</b>
+        </Button>
+    </div>
     <h1>Make Surveys that Listen</h1>
     <h2>Then analyze natural, open ended responses, fast.</h2>
     
-    {#if !$page.data.session}
-    <Button class="large signin" on:click={() => {signIn("google")}}>
-        Sign In with <b>Google</b>
-    </Button>
-    {/if}
+    <a href="{buyLink}" class="buy hero">Get <b>Ask Fast</b></a>
 
     <h4 class="bottom">or learn more<br>↓</h4>
 
@@ -98,8 +104,9 @@
             <li>Powerful AI analysis</li>
             <li>Responsive support</li>
         </ul>
-        <a href="https://buy.stripe.com/test_fZe28v2Axcle6vSeUU?prefilled_promo_code=ASK5" class="buy">Buy Ask Fast</a>
+        <a href="{buyLink}" class="buy">Buy <b>Ask Fast</b></a>
     </div>
+    <Footer/>
 </div>
 
 <style>
@@ -120,11 +127,18 @@
         background-color: var(--color-light);
         color: var(--color-dark);
     }
+    .nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
 
+        width: var(--reasonable-width);
+    }
     h1 {
         font-size: 4rem;
         font-weight: bold;
-        margin: 15rem 0 0.5rem 0;
+        margin: 10rem 0 0.5rem 0;
         color: var(--color-dark);
     }
     h2 {
@@ -136,8 +150,28 @@
         font-size: 1.5rem;
         margin: 1rem 0;
     }
+    h4.name {
+        font-size: 1.2rem;
+        margin: 0;
+        color: var(--color-mid);
+
+        transition: 0.3s all;
+    }
+    h4.name:hover {
+        color: var(--color-info);
+
+        cursor: default;
+    }
+    a.buy.hero {
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        border-radius: 0.25rem;
+
+        margin-bottom: 25rem;
+    }
     h4.bottom {
-        margin: 0 0 15rem 0;
+        position: absolute;
+        top: 90vh;
         font-size: 1rem;
         text-align: center;
         color: var(--color-info);
@@ -321,9 +355,20 @@
     }
     .perks li {
         margin-bottom: 1rem;
+        padding: 0.5rem 0.1rem;
+
+        border-radius: 10px;
+        color: var(--color-dark);
+
+        transition: 0.3s all;
     }
     .perks li:before {
+        color: var(--color-success);
         content: "✓ ";
+    }
+    .perks li:hover {
+        color: var(--color-success);
+        background-color: var(--color-border);
     }
     
     a.buy {
@@ -331,7 +376,6 @@
         padding: 0.5rem 1rem;
 
         font-size: 1.5rem;
-        font-weight: 600;
 
         border-radius: 10px;
         background-color: var(--color-dark);
@@ -347,5 +391,42 @@
     }
     a.buy:active {
         transform: scale(0.95);
+    }
+
+    @media (max-width: 700px) {
+        h1 {
+            font-size: 2.5rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+        }
+        a.buy.hero {
+            font-size: 1.5rem;
+        }
+        .banner {
+            flex-direction: column;
+            align-items: center;
+
+            height: 90vh;
+            padding: 1rem;
+
+            margin-bottom: 10rem;
+        }
+        .banner.green {
+            padding: 2rem 1rem;
+            height: 70vh;
+        }
+        .banner.blue {
+            height: 60vh;
+        }
+        .fakeForm {
+            width: 50%;
+            height: fit-content;
+            transform: scale(1.5);
+            margin: 2rem 0 3rem 0;
+        }
+        .pay {
+            width: 70%;
+        }
     }
 </style>

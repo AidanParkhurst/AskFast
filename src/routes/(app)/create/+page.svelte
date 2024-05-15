@@ -48,7 +48,6 @@
                 <textarea 
                     class="entry question"
                     name="q{i}"
-                    cols=30 rows="2"
                     bind:value={questions[i]}
                     on:keydown={(e) => {deleteQuestion(e, i)}}
                     placeholder="What do you think about..." />
@@ -147,7 +146,7 @@
         color: var(--color-mid);
     }
     .entry.question {
-        columns: 80;
+        width: 95%;
         margin-bottom: 1em;
 
         background-color: var(--color-light);
@@ -229,6 +228,12 @@
         }
         to {
             opacity: 0;
+        }
+    }
+
+    @media (max-width: 700px) {
+        form {
+            width: 80%;
         }
     }
 </style>

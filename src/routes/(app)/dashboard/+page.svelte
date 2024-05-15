@@ -180,4 +180,20 @@
         color: var(--color-dark);
         margin: 0;
     }
+
+    @media (max-width: 700px) {
+        .surveys {
+            width: 90%;
+        }
+        .survey {
+            height: 30%;
+            min-height: 30%;
+        }
+        .stat h2 {
+            font-size: 1.2rem;
+        }
+        .stat h3 {
+            font-size: 0.8rem;
+        }
+    }
 </style>
