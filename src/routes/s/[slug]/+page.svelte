@@ -44,7 +44,7 @@
             {#if i <= questionIndex}
                 <div class="q" transition:fade>
                     <h2>{question}</h2>
-                    <textarea cols="60" rows="2" name="a{i}" bind:value={answers[i]}/>
+                    <textarea rows="2" name="a{i}" bind:value={answers[i]}/>
                 </div>
             {/if}
         {/each}
@@ -67,7 +67,7 @@
     </form>
     {/if}
     <div class="watermark">
-        <p>Powered by <a href="/">Ask Fast</a></p>
+        <a href="/">Powered by <b>Ask Fast</b></a>
     </div>
 </div>
 
@@ -94,6 +94,7 @@
     form {
         display: flex;
         flex-direction: column;
+        width: var(--reasonable-width);
 
         padding: 10px 20px;
 
@@ -112,6 +113,7 @@
         font-family: 'Inter', sans-serif;
         font-size: 1.2em;
         
+        width: calc(100% - 2em);
         margin-bottom: 1em;
         padding: 0.5em 1em;
 
@@ -137,12 +139,6 @@
         color: var(--color-dark);
         margin: 0;
     }
-    p {
-        font-size: 1.2em;
-        font-weight: bold;
-        color: var(--color-mid);
-        margin: 0 0 0.5em 0;
-    }
 
     .watermark {
         position: absolute;
@@ -153,7 +149,17 @@
         color: var(--color-mid);
     }
     .watermark a {
-        color: var(--color-info);
+        margin: 0 0 0.5em 0;
+
+        font-size: 1.2em;
         text-decoration: none;
+        color: var(--color-mid);
+    }
+    .watermark a b {
+        font-weight: bold;
+        transition: 0.3s all;
+    }
+    .watermark a:hover b {
+        color: var(--color-info);
     }
 </style>

@@ -1,5 +1,7 @@
 <script>
     import Button from "$lib/components/Button.svelte"
+    import Footer from "$lib/components/Footer.svelte"
+
     import { fade } from "svelte/transition";
 
     let questionIndex = -1;
@@ -30,6 +32,11 @@
         }
     }
 
+    let buyLink = "https://buy.stripe.com/test_fZe28v2Axcle6vSeUU?prefilled_promo_code=ASK5"
+    /* If they clicked the buy link, just assume they paid. If not, the backend will handle it */
+    let allow = false;  
+
+    export let data;
     /* Gets the response from the form submission */
     /* If form exists, form.success and form.error will be set */
     export let form;
@@ -56,11 +63,23 @@
                 <h2>+ Add A Question</h2>
             </button>
             </div>
-            <Button
-                disabled="{questionIndex < 1 || !valid}"
-                class="large green form">
-                    Create Survey 
-            </Button>
+            {#await data.streamed.user then user}
+            {#if user.balance || allow}
+                <Button
+                    disabled="{questionIndex < 1 || !valid}"
+                    class="large green form">
+                        Create Survey 
+                </Button>
+            {:else}
+                <Button
+                    disabled="{questionIndex < 1 || !valid}"
+                    class="large green form"
+                    type="button"
+                    on:click={() => {window.open(buyLink); allow = true}}>
+                        Buy Ask Fast to Create Surveys
+                </Button>
+            {/if}
+            {/await}
         {:else}
         <Button
             on:click={() => {questionIndex = 0; addQuestion()}}
@@ -81,6 +100,7 @@
     </div>
     {/if}
 </div>
+<Footer />
 
 <style>
     .container {
@@ -103,7 +123,7 @@
         width: 50%;
         height: fit-content;
 
-        margin-top: 2em 0 2em 0;
+        margin: 2em 0 4em 0;
 
         padding: 1em 2em;
 
@@ -146,7 +166,7 @@
         color: var(--color-mid);
     }
     .entry.question {
-        width: 95%;
+        width: calc(100% - 1em);
         margin-bottom: 1em;
 
         background-color: var(--color-light);

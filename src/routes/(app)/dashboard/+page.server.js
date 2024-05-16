@@ -11,6 +11,7 @@ export async function load({ cookies }) {
     let surveys = user.surveys;
     let getSurveyData = async () => {
         let surveyData = [];
+        if (!surveys) return surveyData;
         for(let surveyId of surveys) {
             let surveyEntry = await db.collection('surveys').findOne({ _id: surveyId });
             if(!surveyEntry) continue;
@@ -39,7 +40,7 @@ export async function load({ cookies }) {
 
 	return {
         streamed: {
-            user: { name: user.name, surveys: user.surveys.length, balance: user.balance},
+            user: { name: user.name, surveys: user.surveys?.length, balance: user.balance},
             surveys: getSurveyData(), 
         }
 	};

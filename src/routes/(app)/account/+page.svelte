@@ -1,10 +1,12 @@
 <script>
     import Button from "$lib/components/Button.svelte";
+    import Footer from "$lib/components/Footer.svelte";
     import { signOut } from "@auth/sveltekit/client";
 
     let addBalanceLink = "https://buy.stripe.com/test_14kaF12AxfxqcUgcMN";
     
     let formatBalance = (balance) => {
+        if (!balance) return "$0.00";
         return `$${(balance/100).toFixed(2)}`;
     }
     export let data;
@@ -26,7 +28,7 @@
     </Button>
     {/await}
 </div>
-
+<Footer />
 <style>
     .container {
         display: flex;

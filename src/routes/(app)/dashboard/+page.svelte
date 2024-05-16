@@ -1,4 +1,6 @@
 <script>
+    import Footer from "$lib/components/Footer.svelte";
+
     import { goto } from "$app/navigation"
 
     export let data;
@@ -56,6 +58,7 @@
         {/await}
     </div>
 </div>
+<Footer />
 
 <style>
     .container {

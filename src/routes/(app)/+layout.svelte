@@ -30,18 +30,19 @@
         Dashboard
     </Button>
     <Button class="icon" on:click={() => {goto('/account')}}>
-        <!-- Profile Icon -->
+        <!-- Hamburger Icon -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
             stroke="currentColor" fill="currentColor">
-            <path d="M12 2c-3.866 0-7 3.134-7 7s3.134 7 7 7 7-3.134 7-7-3.134-7-7-7zm0 2c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
+            <path d="M3 6h18m-18 6h18m-18 6h18"/>
         </svg> <br>
-        Profile 
+        Account 
     </Button>
 </div>
 <div class="contents">
     <slot></slot>
 </div>
 
+<!--<path d="M12 2c-3.866 0-7 3.134-7 7s3.134 7 7 7 7-3.134 7-7-3.134-7-7-7zm0 2c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5zm0 2a3 3 0 100 6 3 3 0 000-6z"/>-->
 <style>
     :root {
         --toolwidth: 10vw; /* Desktop toolbar is on the left */

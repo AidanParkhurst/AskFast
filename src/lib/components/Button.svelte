@@ -40,13 +40,20 @@
         cursor: not-allowed;
     }
 
-    button.signin {
+    button.start {
         background-color: var(--color-border);
         color: var(--color-mid);
     }
-    button.signin:hover {
+    button.start:hover {
         background-color: var(--color-dark);
         color: var(--color-light);
+    }
+
+    button.signin {
+        margin: 0;
+        padding: 0;
+
+        width: 100%;
     }
     button.ai {
         width: 10%;

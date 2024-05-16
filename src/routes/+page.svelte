@@ -1,17 +1,8 @@
 <script>
-    import { signIn, signOut } from "@auth/sveltekit/client"
     import { page } from "$app/stores"
     import { goto } from "$app/navigation"
-    import { onMount } from "svelte"
     import Button from "$lib/components/Button.svelte"
     import Footer from "$lib/components/Footer.svelte"
-
-    onMount(() => {
-        if ($page.data.session) {
-            console.log($page.data.session)
-            goto("/dashboard")
-        }
-    })
 
     let buyLink = "https://buy.stripe.com/test_fZe28v2Axcle6vSeUU?prefilled_promo_code=ASK5"
 </script>
@@ -19,10 +10,17 @@
 <div class="container">
     <div class="nav">
         <h4 class="name">Ask Fast</h4>
-        <Button class="signin"
-        on:click={signIn}>
-            Sign in with <b>Google</b>
+        {#if $page.data.session}
+            <Button class="start"
+            on:click={() => {goto("/dashboard")}}>
+                <b>Dashboard</b> 
+            </Button>
+        {:else}
+        <Button class="start"
+        on:click={() => {goto("/signin")}}>
+            <b>Sign In</b>
         </Button>
+        {/if}
     </div>
     <h1>Make Surveys that Listen</h1>
     <h2>Then analyze natural, open ended responses, fast.</h2>
@@ -395,13 +393,16 @@
 
     @media (max-width: 700px) {
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
         h2 {
-            font-size: 1.5rem;
+            font-size: 1rem;
         }
         a.buy.hero {
-            font-size: 1.5rem;
+            font-size: 1rem;
+        }
+        h4.bottom {
+            top: 75vh;
         }
         .banner {
             flex-direction: column;
@@ -427,6 +428,9 @@
         }
         .pay {
             width: 70%;
+        }
+        .perks {
+            font-size: 1.2rem;
         }
     }
 </style>
