@@ -30,7 +30,10 @@
         </form>
         <h3 class="or">——— or ———</h3>
         <Button class="signin" on:click={() => {signIn("google")}}>
-            <h3>Sign in with <b>Google</b></h3>
+            <div class="label">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo">
+                <h3>Sign in with <b>Google</b></h3>
+            </div>
         </Button>
     </div>
 </div>
@@ -94,5 +97,15 @@
 
         margin: 0.5em 0;
         color: var(--color-mid);
+    }
+
+    .label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
+    }
+    h3 {
+        font-weight: normal;
     }
 </style>
