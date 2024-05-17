@@ -31,8 +31,8 @@
             button.blur();
         }
     }
-
-    let buyLink = "https://buy.stripe.com/test_fZe28v2Axcle6vSeUU?prefilled_promo_code=ASK5"
+    
+    let buyLink = "https://buy.stripe.com/7sI6sq4EbeH12bKfYY?prefilled_promo_code=ASK5";
     /* If they clicked the buy link, just assume they paid. If not, the backend will handle it */
     let allow = false;  
 

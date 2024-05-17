@@ -2,8 +2,8 @@
     import Button from "$lib/components/Button.svelte";
     import Footer from "$lib/components/Footer.svelte";
     import { signOut } from "@auth/sveltekit/client";
-
-    let addBalanceLink = "https://buy.stripe.com/test_14kaF12AxfxqcUgcMN";
+    
+    let addBalanceLink = "https://buy.stripe.com/6oEaIG5IfgP9cQo145";
     
     let formatBalance = (balance) => {
         if (!balance) return "$0.00";

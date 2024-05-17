@@ -52,8 +52,21 @@
     button.signin {
         margin: 0;
         padding: 0;
-
         width: 100%;
+
+        background-color: var(--color-border);
+        color: var(--color-dark);
+    }
+    button.signin:disabled {
+        color: var(--color-mid);
+    }
+    button.signin:disabled:hover {
+        background-color: var(--color-border);
+        color: var(--color-mid);
+    }
+    button.signin:hover {
+        background-color: var(--color-dark);
+        color: var(--color-light);
     }
     button.ai {
         width: 10%;

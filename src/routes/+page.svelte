@@ -3,8 +3,8 @@
     import { goto } from "$app/navigation"
     import Button from "$lib/components/Button.svelte"
     import Footer from "$lib/components/Footer.svelte"
-
-    let buyLink = "https://buy.stripe.com/test_fZe28v2Axcle6vSeUU?prefilled_promo_code=ASK5"
+    
+    let buyLink = "https://buy.stripe.com/7sI6sq4EbeH12bKfYY?prefilled_promo_code=ASK5"
 </script>
 
 <div class="container">
@@ -404,6 +404,13 @@
         h4.bottom {
             top: 75vh;
         }
+        .info {
+            margin: 0;
+            padding: 0 2rem;
+        }
+        .info h2 {
+            font-size: 1.5rem;
+        }
         .banner {
             flex-direction: column;
             align-items: center;
@@ -414,11 +421,16 @@
             margin-bottom: 10rem;
         }
         .banner.green {
-            padding: 2rem 1rem;
-            height: 70vh;
+            padding: 1rem;
+        }
+        .banner.green .fakeForm {
+            margin: 2rem 0 0 0;
         }
         .banner.blue {
-            height: 60vh;
+            margin-bottom: 7rem;
+        }
+        .banner.blue .fakeForm {
+            margin: 0 0 3rem 0;
         }
         .fakeForm {
             width: 50%;
