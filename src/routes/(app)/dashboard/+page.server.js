@@ -4,6 +4,7 @@ export async function load({ cookies }) {
     /* Fetch the user from the session*/
     let sessionToken = cookies.get('authjs.session-token');
     let userSession = await db.collection('sessions').findOne({sessionToken: sessionToken});
+    console.log(cookies.getAll());
     console.log(sessionToken);
     console.log(userSession);
     let userId = userSession.userId;
