@@ -22,7 +22,7 @@
     $: balance = data.balance ?? 0;
 
     let copyLink = () => {
-        navigator.clipboard.writeText(`http://localhost:5173/s/${id}`);
+        navigator.clipboard.writeText(`http://www.askfa.st/s/${id}`);
     }
 
     let selected = -1;
