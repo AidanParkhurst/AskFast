@@ -11,7 +11,7 @@ const UPSALE_RATE = 2;
 export async function POST({ request, cookies }) {
 
     /* Fetch the user from the session*/
-    let sessionToken = cookies.get('authjs.session-token');
+    let sessionToken = cookies.get('authjs.session-token') || cookies.get('__Secure-authjs.session-token');
     let userSession = await db.collection('sessions').findOne({sessionToken: sessionToken});
     let userId = userSession.userId;
 
