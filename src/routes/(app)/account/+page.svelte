@@ -39,4 +39,12 @@
 
         background-color: var(--color-light);
     }
+
+    @media (max-width: 700px) {
+        .container {
+            padding: 5vh 0 15vh 0;
+            height: 80vh;
+            flex-direction: column;
+        }
+    }
 </style>

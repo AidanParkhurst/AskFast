@@ -399,6 +399,8 @@
             font-size: 1rem;
         }
         a.buy.hero {
+            margin-top: 10rem;
+            width: 70%;
             font-size: 1rem;
         }
         h4.bottom {
@@ -416,6 +418,7 @@
             align-items: center;
 
             height: 90vh;
+            width: 100%;
             padding: 1rem;
 
             margin-bottom: 10rem;

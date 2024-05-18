@@ -252,6 +252,9 @@
     }
 
     @media (max-width: 700px) {
+        .container {
+            padding: 0 0 10vh 0;
+        }
         form {
             width: 80%;
         }

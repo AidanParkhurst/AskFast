@@ -18,6 +18,8 @@
     let inspect = (id) => {
         goto(`/dashboard/${id}`)
     }
+    
+    let buyLink = "https://buy.stripe.com/7sI6sq4EbeH12bKfYY?prefilled_promo_code=ASK5"
 </script>
 
 <div class="container">
@@ -25,11 +27,21 @@
         <h1>Your Surveys</h1>
     </div>
     <div class="surveys">
-        <div class="survey create" role="button" tabindex="0" 
-            on:click={createSurvey}
-            on:keydown={handleKey}>
-            <h2>+ Create a New Survey</h2>
-        </div>
+        {#await data.streamed.user then user}
+            {#if user.balance}
+            <div class="survey create" role="button" tabindex="0" 
+                on:click={createSurvey}
+                on:keydown={handleKey}>
+                <h2>+ Create a New Survey</h2>
+            </div>
+            {:else}
+            <div class="survey create" role="button" tabindex="0" 
+                on:click={() => {window.open(buyLink)}}
+                on:keydown={handleKey}>
+                <h2>+ Buy Ask Fast</h2>
+            </div>
+            {/if}
+        {/await}
         {#await data.streamed.surveys then surveys}
         {#each surveys as survey}
             <div class="survey" role="button" tabindex="0"
@@ -39,17 +51,19 @@
                     <h2>{survey.title}</h2>
                     <p>{survey.objective}</p>
                 </div>
-                <div class="stat">
-                    <h3>Questions</h3>
-                    <p>{survey.questions.length}</p>
-                </div>
-                <div class="stat">
-                    <h3>Responses</h3>
-                    <p>{survey.responses.length}</p>
-                </div>
-                <div class="stat">
-                    <h3>Open</h3>
-                    <p>{survey.published ? "Yes" : "No"}</p>
+                <div class="details">
+                    <div class="stat">
+                        <h3>Questions</h3>
+                        <p>{survey.questions.length}</p>
+                    </div>
+                    <div class="stat">
+                        <h3>Responses</h3>
+                        <p>{survey.responses.length}</p>
+                    </div>
+                    <div class="stat">
+                        <h3>Open</h3>
+                        <p>{survey.published ? "Yes" : "No"}</p>
+                    </div>
                 </div>
             </div>
         {/each}
@@ -165,6 +179,12 @@
         width: 40%;
         align-items: start;
     }
+    .details {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
     .stat h2 {
         font-size: 1.5rem;
         font-weight: 700;
@@ -185,12 +205,31 @@
     }
 
     @media (max-width: 700px) {
+        .toprow h1 {
+            font-size: 1.5rem;
+        }
         .surveys {
             width: 90%;
         }
         .survey {
-            height: 30%;
+            flex-direction: column;
+            gap: 0;
+            padding: 0;
+            width: 85%;
+            height: fit-content;
             min-height: 30%;
+        }
+        .survey.create h2 {
+            font-size: 1.2rem;
+        }
+        .stat.header {
+            max-width: 100%;
+            width: 80%;
+            align-items: center;
+            margin: 0 0 1rem 0;
+        }
+        .details {
+            margin: 0 0 2rem 0;
         }
         .stat h2 {
             font-size: 1.2rem;

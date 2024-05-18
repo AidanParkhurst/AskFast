@@ -177,5 +177,8 @@
             height: 75%;
             font-size: 0.8rem;
         }
+        button.ai {
+            width: 25%;
+        }
     }
 </style>
