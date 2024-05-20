@@ -164,7 +164,6 @@
         padding: 1rem 2rem;
         font-size: 2rem;
         border-radius: 0.25rem;
-        width: 45%;
         margin-bottom: 25rem;
     }
     h4.bottom {

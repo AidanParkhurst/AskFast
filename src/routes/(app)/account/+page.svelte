@@ -19,7 +19,11 @@
     <Button class="icon red"
         on:click={signOut}>
         <h2>Sign out</h2>
-        <h1>{user.name}</h1>
+        {#if user.name}
+            <h1>{user.name}</h1>
+        {:else}
+            <h1>{user.email}</h1>
+        {/if}
     </Button>
     <Button class="icon green"
         on:click={() => {window.location = addBalanceLink}}>

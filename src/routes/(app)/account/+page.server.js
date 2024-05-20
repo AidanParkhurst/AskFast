@@ -10,7 +10,7 @@ export async function load({ cookies }) {
     let user = await db.collection('users').findOne({ _id: userId });
     return {
         streamed: {
-            user: { name: user.name, balance: user.balance},
+            user: { name: user.name, email: user.email, balance: user.balance},
         }
     };
 }

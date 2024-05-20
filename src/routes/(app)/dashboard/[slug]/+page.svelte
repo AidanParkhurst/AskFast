@@ -1,6 +1,6 @@
 <script>
     import Button from "$lib/components/Button.svelte";
-    import { fade } from "svelte/transition";
+    import Footer from "$lib/components/Footer.svelte";
 
     let publishForm;
     /*
@@ -157,6 +157,7 @@
     </div>
     {/if}
 </div>
+<Footer />
 
 <style>
     .container {
@@ -426,6 +427,12 @@
         }
         to {
             opacity: 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding-bottom: 10vh;
         }
     }
 </style>

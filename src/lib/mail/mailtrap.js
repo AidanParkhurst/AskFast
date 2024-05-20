@@ -14,7 +14,6 @@ const transport = nodemailer.createTransport({
 });
 
 export async function sendVerificationRequest (params) {
-    console.log(params);
     const { identifier: email, url } = params;
     const result = await transport.sendMail({
         to: email,
