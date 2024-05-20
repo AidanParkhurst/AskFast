@@ -2,8 +2,9 @@ import db from "$lib/db/mongo";
 import { openai } from "$lib/ai/openai";
 import { json } from "@sveltejs/kit";
 
-// Rough, slightly overestimated cost of using OpenAI's GPT-3.5 model
-const OPENAI_TOKEN_RATE = 0.0005 / 1000;
+// Rough, slightly overestimated cost of using OpenAI's GPT-4 model
+const OPENAI_INPUT_TOKEN_RATE = 0.01 / 1000;
+const OPENAI_OUTPUT_TOKEN_RATE = 0.03 / 1000;
 const OPENAI_TOKENS_PER_WORD = 3 / 4;
 
 const UPSALE_RATE = 2;
@@ -45,7 +46,7 @@ export async function POST({ request, cookies }) {
         let wordCount = prompt.split(" ").length;
         wordCount += questions.join("\", \"").split(" ").length;
         wordCount += surveyEntry.responses.join("\", \"").split(" ").length;
-        let estimatedCost = wordCount * OPENAI_TOKENS_PER_WORD * OPENAI_TOKEN_RATE * UPSALE_RATE;
+        let estimatedCost = wordCount * OPENAI_TOKENS_PER_WORD * OPENAI_INPUT_TOKEN_RATE * UPSALE_RATE;
         if (!user.balance || user.balance < estimatedCost) {
             return json({
                 status: 402, message: "Insufficient funds to analyze the survey.",
@@ -69,12 +70,13 @@ export async function POST({ request, cookies }) {
                     content: prompt 
                     },
                 ],
-            model: "gpt-3.5-turbo",
+            model: "gpt-4-turbo",
         });
         console.log(completion);
         let data = completion.choices[0].message.content;
-        let tokensUsed = completion.usage.total_tokens;
-        let cost = tokensUsed * OPENAI_TOKEN_RATE * UPSALE_RATE;
+        let promptTokens = completion.usage.prompt_tokens;
+        let completionTokens = completion.usage.completion_tokens;
+        let cost = (promptTokens * OPENAI_INPUT_TOKEN_RATE + completionTokens * OPENAI_OUTPUT_TOKEN_RATE) * UPSALE_RATE;
         user.balance -= cost;
         await db.collection('users').updateOne({ _id: userId }, { $set: { balance: user.balance } });
 

@@ -20,10 +20,9 @@
 <div class="container">
     <div class="menu">
         <h1>Sign in to <b>Ask Fast</b></h1>
-        <form>
+        <form on:submit={() => {signIn("nodemailer", {email, callbackUrl: '/dashboard'})}}>
             <input bind:value={email} class="entry" type="text" name="email" placeholder="Email" />
             <Button class="signin"
-                on:click={() => {}}
                 disabled={isValid(email)}>
                 <h3>Continue with <b>Email</b></h3>
             </Button>
