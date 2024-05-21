@@ -366,7 +366,7 @@
     }
     .perks li:hover {
         color: var(--color-success);
-        background-color: var(--color-border);
+        transform: scale(1.05);
     }
     
     a.buy {

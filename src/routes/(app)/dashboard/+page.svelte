@@ -210,7 +210,7 @@
             width: 90%;
         }
         .survey {
-            flex-direction: column;
+            flex-direction: row;
             gap: 0;
             padding: 0;
             width: 85%;
@@ -226,7 +226,12 @@
             margin: 0 0 1rem 0;
         }
         .details {
-            margin: 0 0 2rem 0;
+            flex-wrap: wrap;
+            margin: 0;
+            height: 80%;
+        }
+        .stat {
+            height: 50%;
         }
         .stat h2 {
             font-size: 1.2rem;

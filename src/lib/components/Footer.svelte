@@ -49,7 +49,7 @@
     }
     .company h1 {
         font-size: 1.5em;
-        color: var(--color-dark);
+        color: var(--color-mid);
         margin: 0;
     }
     .company p {
