@@ -2,8 +2,7 @@
     import Button from "$lib/components/Button.svelte";
     import Footer from "$lib/components/Footer.svelte";
     import { signOut } from "@auth/sveltekit/client";
-    
-    let addBalanceLink = "https://buy.stripe.com/6oEaIG5IfgP9cQo145";
+    import { addBalance } from "$lib/pay/links"
     
     let formatBalance = (balance) => {
         if (!balance) return "$0.00";
@@ -26,7 +25,7 @@
         {/if}
     </Button>
     <Button class="icon green"
-        on:click={() => {window.location = addBalanceLink}}>
+        on:click={() => {window.location = addBalance}}>
         <h2>Add Balance</h2>
         <h1>{formatBalance(user.balance)}</h1>
     </Button>
@@ -47,7 +46,7 @@
     @media (max-width: 700px) {
         .container {
             padding: 5vh 0 15vh 0;
-            height: 80vh;
+            height: 60vh;
             flex-direction: column;
         }
     }

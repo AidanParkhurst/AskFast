@@ -1,7 +1,7 @@
 <script>
     import Button from "$lib/components/Button.svelte"
     import Footer from "$lib/components/Footer.svelte"
-
+    import { access } from "$lib/pay/links";
     import { fade } from "svelte/transition";
 
     let questionIndex = -1;
@@ -32,7 +32,6 @@
         }
     }
     
-    let buyLink = "https://buy.stripe.com/7sI6sq4EbeH12bKfYY?prefilled_promo_code=ASK5";
     /* If they clicked the buy link, just assume they paid. If not, the backend will handle it */
     let allow = false;  
 
@@ -75,7 +74,7 @@
                     disabled="{questionIndex < 1 || !valid}"
                     class="large green form"
                     type="button"
-                    on:click={() => {window.open(buyLink); allow = true}}>
+                    on:click={() => {window.open(access); allow = true}}>
                         Buy Ask Fast to Create Surveys
                 </Button>
             {/if}

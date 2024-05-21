@@ -3,13 +3,13 @@
     import { goto } from "$app/navigation"
     import Button from "$lib/components/Button.svelte"
     import Footer from "$lib/components/Footer.svelte"
-    
-    let buyLink = "https://buy.stripe.com/7sI6sq4EbeH12bKfYY?prefilled_promo_code=ASK5"
+    import {access} from "$lib/pay/links"
+
 </script>
 
 <div class="container">
     <div class="nav">
-        <h4 class="name">Ask Fast</h4>
+        <h4 class="name"> Ask Fast </h4>
         {#if $page.data.session}
             <Button class="start"
             on:click={() => {goto("/dashboard")}}>
@@ -18,14 +18,14 @@
         {:else}
         <Button class="start"
         on:click={() => {goto("/signin")}}>
-            <b>Sign In</b>
+            <b>Dashboard</b>
         </Button>
         {/if}
     </div>
     <h1>Make Surveys that Listen</h1>
     <h2>Then analyze natural, open ended responses, fast.</h2>
     
-    <a href="{buyLink}" class="buy hero">Get <b>Ask Fast</b></a>
+    <a href="{access}" class="buy hero">Get <b>Ask Fast</b></a>
 
     <h4 class="bottom">or learn more<br>↓</h4>
 
@@ -92,7 +92,7 @@
     <div class="pay">
         <h3>Access Everything</h3>
         <span class="pricing">
-            <h4>$10</h4><h2>$5</h2><h3>USD</h3>
+            <h4>$8</h4><h2>$4</h2><h3>USD</h3>
         </span>
         <ul class="perks">
             <li>Unlimited surveys</li>
@@ -102,7 +102,7 @@
             <li>Powerful AI analysis</li>
             <li>Responsive support</li>
         </ul>
-        <a href="{buyLink}" class="buy">Buy <b>Ask Fast</b></a>
+        <a href="{access}" class="buy">Buy <b>Ask Fast</b></a>
     </div>
     <Footer/>
 </div>
@@ -112,6 +112,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        z-index: -2;
 
         display: flex;
         flex-direction: column;
@@ -404,6 +405,7 @@
         h4.bottom {
             top: 75vh;
         }
+        
         .info {
             margin: 0;
             padding: 0 2rem;

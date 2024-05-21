@@ -7,7 +7,7 @@
         </div>
         <div class="links">
             <h2>Links</h2>
-            <a href="mailto:aidanp@rkhur.st">Support</a>
+            <a href="mailto:support@askfa.st">Support</a>
             <a href="https://rkhur.st">Made by Aidan Parkhurst</a>
         </div>
         <div class="links">

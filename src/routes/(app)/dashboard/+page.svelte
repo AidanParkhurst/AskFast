@@ -1,6 +1,6 @@
 <script>
     import Footer from "$lib/components/Footer.svelte";
-
+    import { access } from "$lib/pay/links";
     import { goto } from "$app/navigation"
 
     export let data;
@@ -18,8 +18,6 @@
     let inspect = (id) => {
         goto(`/dashboard/${id}`)
     }
-    
-    let buyLink = "https://buy.stripe.com/7sI6sq4EbeH12bKfYY?prefilled_promo_code=ASK5"
 </script>
 
 <div class="container">
@@ -36,7 +34,7 @@
             </div>
             {:else}
             <div class="survey create" role="button" tabindex="0" 
-                on:click={() => {window.open(buyLink)}}
+                on:click={() => {window.open(access)}}
                 on:keydown={handleKey}>
                 <h2>+ Buy Ask Fast</h2>
             </div>
@@ -224,8 +222,7 @@
         }
         .stat.header {
             max-width: 100%;
-            width: 80%;
-            align-items: center;
+            width: calc(100% - 2rem);
             margin: 0 0 1rem 0;
         }
         .details {
