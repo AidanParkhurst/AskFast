@@ -116,6 +116,17 @@
         font-weight: bold;
     }
 
+    .back {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        
+        margin: 0;
+        padding: 0 1rem;
+        
+        width: fit-content
+    }
+
     .small {
         font-size: .8rem;
         padding: 0.25rem 0.5rem;
@@ -179,6 +190,12 @@
         }
         button.ai {
             width: 25%;
+        }
+        button.back {
+            font-size: 0.8rem;
+            padding: 0rem 0.5rem;
+            top: 0.5rem;
+            left: 0.5rem;
         }
     }
 </style>

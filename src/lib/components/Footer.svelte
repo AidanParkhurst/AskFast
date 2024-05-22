@@ -1,7 +1,7 @@
 <div class="container">
     <div class="contents">
         <div class="company">
-            <h1>Ask Fast</h1>
+            <a href="https://www.askfa.st">Ask Fast</a>
             <p>Create, share, and analyze surveys fast!</p>
             <p>Copyright © 2024 - All rights reserved</p>
         </div>
@@ -47,10 +47,19 @@
         flex-direction: column;
         justify-content: center;
     }
-    .company h1 {
+    .company a {
+        text-decoration: none;
+        font-weight: bold;
         font-size: 1.5em;
         color: var(--color-mid);
+
         margin: 0;
+        width: fit-content;
+
+        transition: 0.3s all;
+    }
+    .company a:hover {
+        color: var(--color-info);
     }
     .company p {
         font-size: 1em;

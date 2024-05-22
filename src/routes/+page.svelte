@@ -7,6 +7,11 @@
 
 </script>
 
+<svelte:head>
+    <title>Ask Fast</title>
+    <meta name="description" content="Ask questions. Learn from responses. Surveying made simple with AI analysis. Ask Fast allows you to create questionnaires, read responses in real time, and parse results with AI.">
+</svelte:head>
+
 <div class="container">
     <div class="nav">
         <h4 class="name"> Ask Fast </h4>
