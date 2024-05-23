@@ -3,6 +3,11 @@
     import Footer from "$lib/components/Footer.svelte";
 </script>
 
+<svelte:head>
+    <title>AskFast - Privacy Policy</title>
+    <meta name="description" content="The privacy policy outlining how AskFast, an AI powered form building webapp, protects and uses data.">
+</svelte:head>
+
 <div class="container">
     <div class="contents">
         <Button class="back start" on:click={() => {window.history.back()}}>

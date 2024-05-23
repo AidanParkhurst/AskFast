@@ -1,7 +1,7 @@
 <div class="container">
     <div class="contents">
         <div class="company">
-            <a href="https://www.askfa.st">Ask Fast</a>
+            <a href="https://www.askfa.st">AskFast</a>
             <p>Create, share, and analyze surveys fast!</p>
             <p>Copyright © 2024 - All rights reserved</p>
         </div>

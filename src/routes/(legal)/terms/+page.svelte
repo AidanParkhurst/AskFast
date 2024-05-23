@@ -3,6 +3,11 @@
     import Footer from "$lib/components/Footer.svelte";
 </script>
 
+<svelte:head>
+    <title>AskFast - Terms of Service</title>
+    <meta name="description" content="The terms of service, outlining the terms users agree to when signing up for AskFast, a survey building webapp.">
+</svelte:head>
+
 <div class="container">
     <div class="contents">
         <Button class="back start" on:click={() => {window.history.back()}}>

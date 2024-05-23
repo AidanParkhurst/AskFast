@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-    <title>Ask Fast - Sign In</title>
+    <title>AskFast - Sign In</title>
     <meta name="description" content="Sign in, or create a free account with Ask Fast! Start surveying and learning from responses easily, with this AI powered webapp.">
 </svelte:head>
 

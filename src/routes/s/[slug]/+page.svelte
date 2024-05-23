@@ -94,7 +94,7 @@
     form {
         display: flex;
         flex-direction: column;
-        width: var(--reasonable-width);
+        width: 60%;
 
         padding: 10px 20px;
 
@@ -161,5 +161,11 @@
     }
     .watermark a:hover b {
         color: var(--color-info);
+    }
+
+    @media (max-width: 700px) {
+        form {
+            width: 90%;
+        }
     }
 </style>

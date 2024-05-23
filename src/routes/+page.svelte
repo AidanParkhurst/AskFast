@@ -8,13 +8,13 @@
 </script>
 
 <svelte:head>
-    <title>Ask Fast</title>
+    <title>AskFast</title>
     <meta name="description" content="Ask questions. Learn from responses. Surveying made simple with AI analysis. Ask Fast allows you to create questionnaires, read responses in real time, and parse results with AI.">
 </svelte:head>
 
 <div class="container">
     <div class="nav">
-        <h4 class="name"> Ask Fast </h4>
+        <h4 class="name"> AskFast </h4>
         {#if $page.data.session}
             <Button class="start"
             on:click={() => {goto("/dashboard")}}>
@@ -30,7 +30,7 @@
     <h1>Make Surveys that Listen</h1>
     <h2>Then analyze natural, open ended responses, fast.</h2>
     
-    <a href="{access}" class="buy hero">Get <b>Ask Fast</b></a>
+    <a href="{access}" class="buy hero">Get <b>AskFast</b></a>
 
     <h4 class="bottom">or learn more<br>↓</h4>
 
@@ -75,10 +75,10 @@
         <div class="fakeForm">
             <div class="chat">
                 <div class="prompt">
-                    <h4>How do people make surveys?</h4>
+                    <h4>Which features do users enjoy?</h4>
                 </div>
                 <div class="response">
-                    <h4>Based on the responses, users tend to make surveys using slow, old tools, that lack AI assistance.</h4>
+                    <h4>Based on the responses, several users mention the AI assistance being helpful and efficient.</h4>
                 </div>
             </div>
             <div class="message">
@@ -102,12 +102,11 @@
         <ul class="perks">
             <li>Unlimited surveys</li>
             <li>Uncapped survey length</li>
-            <li>Share, open and close surveys on demand</li>
-            <li>View responses immediately</li>
-            <li>Powerful AI analysis</li>
+            <li>Real time response viewer</li>
+            <li>Open ended AI analysis</li>
             <li>Responsive support</li>
         </ul>
-        <a href="{access}" class="buy">Buy <b>Ask Fast</b></a>
+        <a href="{access}" class="buy">Buy <b>AskFast</b></a>
     </div>
     <Footer/>
 </div>

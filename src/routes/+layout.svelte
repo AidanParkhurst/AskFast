@@ -1,5 +1,5 @@
 <script>
-    let title = 'Ask Fast';
+    let title = 'AskFast';
 </script>
 
 <title>{title}</title>
