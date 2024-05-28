@@ -473,11 +473,9 @@
             text-align: center;
         }
         .hero h1 {
-            text-align: left;
             margin-top: 2rem;
         }
         .hero h2 {
-            text-align: left;
             margin-bottom: 0;
         }
         a.buy.hero {
@@ -489,10 +487,10 @@
             margin-top: 0.5rem;
         }
         h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
         h2 {
-            font-size: 1rem;
+            font-size: .9rem;
         }
         h4.underhero {
             font-size: 0.8rem;
