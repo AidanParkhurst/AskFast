@@ -27,14 +27,20 @@
         </Button>
         {/if}
     </div>
-    <h1>Make Surveys that Listen</h1>
-    <h2>Then analyze natural, open ended responses, fast.</h2>
-    {#if $page.data.session}
-        <a href="/dashboard" class="buy hero">Build Surveys <b>Fast</b></a>
-    {:else}
-        <a href="/signin" class="buy hero">Build Surveys <b>Fast</b></a>
-    {/if}
-    <h4 class="underhero">(By the way, it's free!)</h4>
+    <div class="hero">
+        <h1>Make Surveys that Listen</h1>
+        <h2>Then analyze natural, open ended responses, fast.</h2>
+        {#if $page.data.session}
+            <a href="/dashboard" class="buy hero">Build Surveys <b>Fast</b></a>
+        {:else}
+            <a href="/signin" class="buy hero">Build Surveys <b>Fast</b></a>
+        {/if}
+        <h4 class="underhero">Start now for free!</h4>
+
+        <div class="visual">
+            ¿?
+        </div>
+    </div>
 
     <h4 class="bottom">or learn more<br>↓</h4>
 
@@ -110,7 +116,7 @@
                 <li>Response viewer</li>
                 <li>Non-priority support</li>
             </ul>
-            <a href="{access}" class="buy">Try <b>AskFast</b></a>
+            <a href="/signin" class="buy">Try <b>AskFast</b></a>
         </div>
         <div class="pay promo">
             <h3>Access Everything</h3>
@@ -157,17 +163,6 @@
 
         width: var(--reasonable-width);
     }
-    h1 {
-        font-size: 4rem;
-        font-weight: bold;
-        margin: 10rem 0 0.5rem 0;
-        color: var(--color-dark);
-    }
-    h2 {
-        font-size: 2rem;
-        margin: 0 0 1rem 0;
-        color: var(--color-mid);
-    }
     h4 {
         font-size: 1.5rem;
         margin: 1rem 0;
@@ -184,16 +179,51 @@
 
         cursor: default;
     }
+    
+    .hero {
+        height: fit-content;
+        width: var(--reasonable-width);
+    }
+    h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin: 10rem 0 0.5rem 0;
+        color: var(--color-dark);
+    }
+    h2 {
+        font-size: 1.5rem;
+        margin: 0 0 3rem 0;
+        color: var(--color-mid);
+    }
     a.buy.hero {
         padding: 1rem 2rem;
-        font-size: 2rem;
+        font-size: 1.5rem;
         border-radius: 0.25rem;
-        margin-bottom: 0.5rem;
     }
     h4.underhero {
-        margin-bottom: 25rem;
+        margin-top: 2rem;
+        margin-bottom: 23rem;
         font-size: 1.2rem;
-        color: var(--color-info);
+        color: var(--color-mid);
+    }
+    .visual {
+        position: absolute;
+        top: 0;
+        right: 10%;
+
+        user-select: none;
+        -webkit-user-select: none;
+        pointer-events: none;
+
+        font-family: 'Inter', sans-serif;
+        font-size: 30rem;
+        font-weight: 700;
+        color: var(--color-border);
+
+        transform: rotate(10deg);
+        text-shadow: 0 5px 0 var(--color-mid),
+                     0 10px 0px var(--color-mid),
+                     10px 10px 20px var(--color-border);
     }
     h4.bottom {
         position: absolute;
@@ -434,21 +464,39 @@
     }
 
     @media (max-width: 700px) {
+        .visual {
+            top: 9rem;
+            left: 10%;
+            font-size: 15rem;
+        }
+        .hero {
+            text-align: center;
+        }
+        .hero h1 {
+            margin-top: 2rem;
+        }
+        .hero h2 {
+            margin-bottom: 20rem;
+        }
+        a.buy.hero {
+            display: block;
+            width: 80%;
+            font-size: 1rem;
+        }
+        h4.underhero {
+            margin-top: 0.5rem;
+        }
         h1 {
             font-size: 2rem;
         }
         h2 {
             font-size: 1rem;
         }
-        a.buy.hero {
-            width: 80%;
-            font-size: 1rem;
-        }
         h4.underhero {
             font-size: 0.8rem;
         }
         h4.bottom {
-            top: 75vh;
+            top: 80vh;
         }
         
         .info {
