@@ -30,6 +30,9 @@
     <div class="hero">
         <h1>Make Surveys that Listen</h1>
         <h2>Then analyze natural, open ended responses, fast.</h2>
+        <div class="visual">
+            ¿?
+        </div>
         {#if $page.data.session}
             <a href="/dashboard" class="buy hero">Build Surveys <b>Fast</b></a>
         {:else}
@@ -37,9 +40,6 @@
         {/if}
         <h4 class="underhero">Start now for free!</h4>
 
-        <div class="visual">
-            ¿?
-        </div>
     </div>
 
     <h4 class="bottom">or learn more<br>↓</h4>
@@ -465,18 +465,20 @@
 
     @media (max-width: 700px) {
         .visual {
-            top: 9rem;
-            left: 10%;
+            position: unset;
             font-size: 15rem;
+            margin: -2rem 0 2rem 0;
         }
         .hero {
             text-align: center;
         }
         .hero h1 {
+            text-align: left;
             margin-top: 2rem;
         }
         .hero h2 {
-            margin-bottom: 20rem;
+            text-align: left;
+            margin-bottom: 0;
         }
         a.buy.hero {
             display: block;
