@@ -1,5 +1,9 @@
 <script>
+    import { inject } from '@vercel/analytics'
+
     let title = 'AskFast';
+
+    inject();
 </script>
 
 <title>{title}</title>

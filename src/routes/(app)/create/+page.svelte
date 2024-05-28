@@ -1,7 +1,6 @@
 <script>
     import Button from "$lib/components/Button.svelte"
     import Footer from "$lib/components/Footer.svelte"
-    import { access } from "$lib/pay/links";
     import { fade } from "svelte/transition";
 
     let questionIndex = -1;
@@ -31,15 +30,16 @@
             button.blur();
         }
     }
-    
-    /* If they clicked the buy link, just assume they paid. If not, the backend will handle it */
-    let allow = false;  
 
-    export let data;
     /* Gets the response from the form submission */
     /* If form exists, form.success and form.error will be set */
     export let form;
 </script>
+
+<svelte:head>
+    <title>AskFast - Create</title>
+    <meta name="description" content="The create page for AskFast, an AI powered questionnaire building webapp, where users can make new surveys.">
+</svelte:head>
 
 <div class="container">
     <form method="POST" enctype="multipart/form-data">
@@ -62,23 +62,11 @@
                 <h2>+ Add A Question</h2>
             </button>
             </div>
-            {#await data.streamed.user then user}
-            {#if user.balance || allow}
-                <Button
-                    disabled="{questionIndex < 1 || !valid}"
-                    class="large green form">
-                        Create Survey 
-                </Button>
-            {:else}
-                <Button
-                    disabled="{questionIndex < 1 || !valid}"
-                    class="large green form"
-                    type="button"
-                    on:click={() => {window.open(access); allow = true}}>
-                        Buy Ask Fast to Create Surveys
-                </Button>
-            {/if}
-            {/await}
+            <Button
+                disabled="{questionIndex < 1 || !valid}"
+                class="large green form">
+                    Create Survey 
+            </Button>
         {:else}
         <Button
             on:click={() => {questionIndex = 0; addQuestion()}}

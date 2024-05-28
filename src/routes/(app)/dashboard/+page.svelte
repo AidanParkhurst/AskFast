@@ -1,6 +1,5 @@
 <script>
     import Footer from "$lib/components/Footer.svelte";
-    import { access } from "$lib/pay/links";
     import { goto } from "$app/navigation"
 
     export let data;
@@ -20,25 +19,22 @@
     }
 </script>
 
+<svelte:head>
+    <title>AskFast - Dashboard</title>
+    <meta name="description" content="The dashboard for AskFast, an AI powered questionnaire building webapp, where users can view their surveys.">
+</svelte:head>
+
 <div class="container">
     <div class="toprow">
         <h1>Your Surveys</h1>
     </div>
     <div class="surveys">
         {#await data.streamed.user then user}
-            {#if user.balance}
             <div class="survey create" role="button" tabindex="0" 
                 on:click={createSurvey}
                 on:keydown={handleKey}>
                 <h2>+ Create a New Survey</h2>
             </div>
-            {:else}
-            <div class="survey create" role="button" tabindex="0" 
-                on:click={() => {window.open(access)}}
-                on:keydown={handleKey}>
-                <h2>+ Buy Ask Fast</h2>
-            </div>
-            {/if}
         {/await}
         {#await data.streamed.surveys then surveys}
         {#each surveys as survey}

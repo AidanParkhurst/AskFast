@@ -1,20 +1,5 @@
 import db from "$lib/db/mongo";
 
-export async function load({ cookies }) {
-    /* Fetch the user from the session*/
-    let sessionToken = cookies.get('authjs.session-token') || cookies.get('__Secure-authjs.session-token');
-    let userSession = await db.collection('sessions').findOne({sessionToken: sessionToken});
-    let userId = userSession.userId;
-
-    /* Fetch the surveys for the user */
-    let user = await db.collection('users').findOne({ _id: userId });
-    return {
-        streamed: {
-            user: {balance: user.balance},
-        }
-    };
-}
-
 export const actions = {
     default: async ({ request, cookies }) => {
         /* Get the form data from our frontend */
@@ -28,10 +13,12 @@ export const actions = {
         
         let user = await db.collection('users').findOne({ _id: userId});
         if (user.balance === undefined) {
-            return {
-                success: false,
-                error: true,
-            };
+            // If the user doesn't have a balance, they can only create 5 surveys
+            if (user.surveys.length > 4)
+                return {
+                    success: false,
+                    error: true,
+                };
         }
 
         try {

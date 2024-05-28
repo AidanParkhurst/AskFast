@@ -1,6 +1,7 @@
 <script>
     import Button from "$lib/components/Button.svelte";
     import Footer from "$lib/components/Footer.svelte";
+    import { addBalance } from "$lib/pay/links"
 
     let publishForm;
     /*
@@ -109,14 +110,19 @@
             {/if}
         </div>
         <div class="message">
-            <input bind:value={prompt} class="entry" placeholder="What would you like to know?">
-            <Button class="ai"
-                on:click={sendPrompt}>
-                <!--Up Arrow-->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    stroke="currentColor" fill="currentColor">
-                    <path d="M12 2l10 10h-7v10h-6v-10h-7z" />
-            </Button>
+            {#if balance}
+                <input bind:value={prompt} class="entry" placeholder="What would you like to know?">
+                <Button class="ai"
+                    on:click={sendPrompt}>
+                    <!--Up Arrow-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        stroke="currentColor" fill="currentColor">
+                        <path d="M12 2l10 10h-7v10h-6v-10h-7z" />
+                </Button>
+            {:else}
+                <input class="entry" disabled=true placeholder="To use AI analysis, first add balance to your account.">
+                <Button class="ai" on:click={() => {window.open(addBalance)}}>Add Balance</Button>   
+            {/if}
         </div>
     </div>
     <div class="card">

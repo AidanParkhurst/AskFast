@@ -11,6 +11,11 @@
     export let data;
 </script>
 
+<svelte:head>
+    <title>AskFast - Account</title>
+    <meta name="description" content="The account tab for AskFast, an AI powered question asking app, where users can sign out, or add balance.">
+</svelte:head>
+
 <div class="container">
     {#await data.streamed.user}
     <h1>Loading...</h1>

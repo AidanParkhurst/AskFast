@@ -29,8 +29,12 @@
     </div>
     <h1>Make Surveys that Listen</h1>
     <h2>Then analyze natural, open ended responses, fast.</h2>
-    
-    <a href="{access}" class="buy hero">Get <b>AskFast</b></a>
+    {#if $page.data.session}
+        <a href="/dashboard" class="buy hero">Build Surveys <b>Fast</b></a>
+    {:else}
+        <a href="/signin" class="buy hero">Build Surveys <b>Fast</b></a>
+    {/if}
+    <h4 class="underhero">(By the way, it's free!)</h4>
 
     <h4 class="bottom">or learn more<br>↓</h4>
 
@@ -94,19 +98,34 @@
         </div>
     </div>
 
-    <div class="pay">
-        <h3>Access Everything</h3>
-        <span class="pricing">
-            <h4>$8</h4><h2>$4</h2><h3>USD</h3>
-        </span>
-        <ul class="perks">
-            <li>Unlimited surveys</li>
-            <li>Uncapped survey length</li>
-            <li>Real time response viewer</li>
-            <li>Open ended AI analysis</li>
-            <li>Responsive support</li>
-        </ul>
-        <a href="{access}" class="buy">Buy <b>AskFast</b></a>
+    <div class="options">
+        <div class="pay">
+            <h3>Try it Out</h3>
+            <span class="pricing">
+                <h2>Free!</h2>
+            </span>
+            <ul class="perks">
+                <li>Up to 5 surveys</li>
+                <li>Uncapped survey length</li>
+                <li>Response viewer</li>
+                <li>Non-priority support</li>
+            </ul>
+            <a href="{access}" class="buy">Try <b>AskFast</b></a>
+        </div>
+        <div class="pay promo">
+            <h3>Access Everything</h3>
+            <span class="pricing">
+                <h4>$8</h4><h2>$4</h2><h3>USD</h3>
+            </span>
+            <ul class="perks">
+                <li>Unlimited surveys</li>
+                <li>Uncapped survey length</li>
+                <li>Real time response viewer</li>
+                <li>Open ended AI analysis</li>
+                <li>Responsive support</li>
+            </ul>
+            <a href="{access}" class="buy promo">Buy <b>AskFast</b></a>
+        </div>
     </div>
     <Footer/>
 </div>
@@ -169,7 +188,12 @@
         padding: 1rem 2rem;
         font-size: 2rem;
         border-radius: 0.25rem;
+        margin-bottom: 0.5rem;
+    }
+    h4.underhero {
         margin-bottom: 25rem;
+        font-size: 1.2rem;
+        color: var(--color-info);
     }
     h4.bottom {
         position: absolute;
@@ -303,11 +327,18 @@
     .message .input:hover {
         transform: none;
     }
+    .options {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
 
+        width: var(--reasonable-width);
+    }
     .pay {
         display: flex;
         flex-direction: column;
 
+        height: fit-content;
         width: calc(var(--reasonable-width) / 2);
 
         margin-bottom: 10rem;
@@ -320,6 +351,9 @@
         background-color: var(--color-light);
 
         transition: 0.3s all;
+    }
+    .pay.promo {
+        border: 2px solid var(--color-success);
     }
     .pay h3 {
         margin: 0 0 1rem 0;
@@ -388,8 +422,12 @@
 
         transition: 0.3s all;
     }
-    a.buy:hover {
+    a.buy.promo {
         background-color: var(--color-success);
+        transition: 0.3s all;
+    }
+    a.buy:hover {
+        background-color: var(--color-info);
     }
     a.buy:active {
         transform: scale(0.95);
@@ -405,6 +443,9 @@
         a.buy.hero {
             width: 80%;
             font-size: 1rem;
+        }
+        h4.underhero {
+            font-size: 0.8rem;
         }
         h4.bottom {
             top: 75vh;
@@ -451,6 +492,11 @@
         }
         .perks {
             font-size: 1.2rem;
+        }
+
+        .options {
+            flex-direction: column;
+            align-items: center;
         }
     }
 </style>
