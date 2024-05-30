@@ -131,6 +131,37 @@
         font-size: .8rem;
         padding: 0.25rem 0.5rem;
     }
+    
+    .hero {
+        margin: 0;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        border-radius: 0.25rem;
+        font-weight: bold;
+        background-color: var(--color-info);
+    }
+    .hero:hover {
+        color: var(--color-info);
+        transform: scale(1.05);
+    }
+    .hero:active {
+        animation: wiggle 0.4s forwards;
+    }
+
+    @keyframes wiggle {
+        0% {
+            transform: scale(1.05) rotate(0deg);
+        }
+        33% {
+            transform: scale(1.03) rotate(2deg);
+        }
+        66% {
+            transform: scale(1.01) rotate(-2deg);
+        }
+        100% {
+            transform: scale(0.98) rotate(0deg);
+        }
+    }
 
     .icon {
         background-color: transparent;
@@ -196,6 +227,9 @@
             padding: 0rem 0.5rem;
             top: 0.5rem;
             left: 0.5rem;
+        }
+        button.hero {
+            margin: 1rem 0 0.2rem 0;
         }
     }
 </style>

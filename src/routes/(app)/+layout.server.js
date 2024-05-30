@@ -4,7 +4,7 @@ import db from '$lib/db/mongo';
 export const load = async (event) => {
     const session = await event.locals.getSession();
 
-    if (!session) return redirect(307, '/');
+    if (!session) return redirect(307, '/signin');
 
     // Use email to identify the user
     const user = await db.collection('users').findOne({ email: session.user.email });

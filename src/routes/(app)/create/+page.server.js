@@ -14,7 +14,7 @@ export const actions = {
         let user = await db.collection('users').findOne({ _id: userId});
         if (user.balance === undefined) {
             // If the user doesn't have a balance, they can only create 5 surveys
-            if (user.surveys.length > 4)
+            if (user.surveys.length > 2)
                 return {
                     success: false,
                     error: true,

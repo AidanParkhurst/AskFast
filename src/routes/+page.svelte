@@ -5,6 +5,10 @@
     import Footer from "$lib/components/Footer.svelte"
     import {access} from "$lib/pay/links"
 
+    let show = (page) => {
+        // scroll to the pricing div
+        document.getElementById(page).scrollIntoView({behavior: "smooth"})
+    }
 </script>
 
 <svelte:head>
@@ -15,30 +19,21 @@
 <div class="container">
     <div class="nav">
         <h4 class="name"> AskFast </h4>
-        {#if $page.data.session}
-            <Button class="start"
-            on:click={() => {goto("/dashboard")}}>
-                <b>Dashboard</b> 
-            </Button>
-        {:else}
         <Button class="start"
-        on:click={() => {goto("/signin")}}>
-            <b>Dashboard</b>
+        on:click={() => {goto("/dashboard")}}>
+            <b>Dashboard</b> 
         </Button>
-        {/if}
     </div>
     <div class="hero">
         <h1>Make Surveys that Listen</h1>
         <h2>Then analyze natural, open ended responses, fast.</h2>
+        <Button class="hero" on:click={() => {goto("/create")}}>
+            Start Surveying Fast
+        </Button>
+        <h4 class="underhero">Start now for free!</h4>
         <div class="visual">
             ¿?
         </div>
-        {#if $page.data.session}
-            <a href="/dashboard" class="buy hero">Build Surveys <b>Fast</b></a>
-        {:else}
-            <a href="/signin" class="buy hero">Build Surveys <b>Fast</b></a>
-        {/if}
-        <h4 class="underhero">Start now for free!</h4>
 
     </div>
 
@@ -104,14 +99,14 @@
         </div>
     </div>
 
-    <div class="options">
+    <div class="options" id="pricing">
         <div class="pay">
             <h3>Try it Out</h3>
             <span class="pricing">
                 <h2>Free!</h2>
             </span>
             <ul class="perks">
-                <li>Up to 5 surveys</li>
+                <li>Up to 3 surveys</li>
                 <li>Uncapped survey length</li>
                 <li>Response viewer</li>
                 <li>Non-priority support</li>
@@ -127,7 +122,7 @@
                 <li>Unlimited surveys</li>
                 <li>Uncapped survey length</li>
                 <li>Real time response viewer</li>
-                <li>Open ended AI analysis</li>
+                <li>$4 credit for AI analysis</li>
                 <li>Responsive support</li>
             </ul>
             <a href="{access}" class="buy promo">Buy <b>AskFast</b></a>
@@ -179,6 +174,19 @@
 
         cursor: default;
     }
+    a {
+        font-size: 1.1rem;
+        margin: 1rem 0;
+        font-weight: 500;
+        color: var(--color-mid);
+        text-decoration: none;
+        cursor: pointer;
+
+        transition: 0.3s all;
+    }
+    a:hover {
+        color: var(--color-info);
+    }
     
     .hero {
         height: fit-content;
@@ -195,11 +203,6 @@
         margin: 0 0 3rem 0;
         color: var(--color-mid);
     }
-    a.buy.hero {
-        padding: 1rem 2rem;
-        font-size: 1.5rem;
-        border-radius: 0.25rem;
-    }
     h4.underhero {
         margin-top: 2rem;
         margin-bottom: 23rem;
@@ -209,7 +212,7 @@
     .visual {
         position: absolute;
         top: 0;
-        right: 10%;
+        left: 54rem;
 
         user-select: none;
         -webkit-user-select: none;
@@ -217,13 +220,14 @@
 
         font-family: 'Inter', sans-serif;
         font-size: 30rem;
-        font-weight: 700;
-        color: var(--color-border);
-
+        font-weight: 600;
+        --top-color: var(--color-info);
+        --side-color: #ccc;
+        color: var(--top-color);
         transform: rotate(10deg);
-        text-shadow: 0 5px 0 var(--color-mid),
-                     0 10px 0px var(--color-mid),
-                     10px 10px 20px var(--color-border);
+        text-shadow: 0 5px 0 var(--side-color),
+                     0 10px 0px var(--side-color),
+                     15px 20px 20px var(--color-border);
     }
     h4.bottom {
         position: absolute;
@@ -466,8 +470,8 @@
     @media (max-width: 700px) {
         .visual {
             position: unset;
-            font-size: 15rem;
-            margin: -2rem 0 2rem 0;
+            font-size: 18rem;
+            margin: -4rem 0 10rem 0;
         }
         .hero {
             text-align: center;
@@ -478,13 +482,9 @@
         .hero h2 {
             margin-bottom: 0;
         }
-        a.buy.hero {
-            display: block;
-            width: 80%;
-            font-size: 1rem;
-        }
         h4.underhero {
             margin-top: 0.5rem;
+            margin-bottom: 1rem;
         }
         h1 {
             font-size: 1.8rem;
@@ -494,6 +494,7 @@
         }
         h4.underhero {
             font-size: 0.8rem;
+            margin-top: 0rem;
         }
         h4.bottom {
             top: 80vh;
