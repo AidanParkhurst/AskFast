@@ -30,7 +30,7 @@
         <Button class="hero" on:click={() => {goto("/create")}}>
             Start Surveying Fast
         </Button>
-        <h4 class="underhero">Start now for free!</h4>
+        <h4 class="underhero">Fast, informative, and free!</h4>
         <div class="visual">
             ¿?
         </div>
@@ -204,7 +204,7 @@
         color: var(--color-mid);
     }
     h4.underhero {
-        margin-top: 2rem;
+        margin-top: 0.5rem;
         margin-bottom: 23rem;
         font-size: 1.2rem;
         color: var(--color-mid);
